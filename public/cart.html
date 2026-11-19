@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ROZEVA | Shopping Cart</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-pink-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between bg-white px-6 py-5 shadow-sm">
+        <a href="index.html" class="text-2xl font-bold tracking-wide text-pink-600">
+            ROZEVA.
+        </a>
+
+        <a href="product.html" class="font-medium text-pink-600 hover:text-pink-800">
+            Continue Shopping
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-6xl px-4 py-10">
+
+        <h1 class="mb-8 text-3xl font-bold text-pink-700">
+            My Shopping Cart
+        </h1>
+
+        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
+
+            <!-- Cart Products -->
+            <section id="cartItems" class="space-y-4 lg:col-span-2">
+
+                <!-- Products will appear here -->
+
+            </section>
+
+            <!-- Order Summary -->
+            <aside class="rounded-2xl bg-white p-6 shadow-sm">
+                <h2 class="mb-5 text-xl font-semibold text-pink-700">
+                    Order Summary
+                </h2>
+
+                <div class="mb-4 flex justify-between">
+                    <span>Items</span>
+                    <span id="itemCount">0</span>
+                </div>
+
+                <div class="mb-5 flex justify-between border-b border-pink-100 pb-5">
+                    <span>Subtotal</span>
+                    <span>Rs. <span id="cartTotal">0</span></span>
+                </div>
+
+                <button id="checkoutBtn"
+                    class="w-full rounded-xl bg-pink-600 py-3 font-semibold text-white transition hover:bg-pink-700">
+                    Proceed to Checkout
+                </button>
+
+                <a href="product.html" class="mt-4 block text-center text-sm text-pink-600 hover:underline">
+                    Continue Shopping
+                </a>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-10 bg-white px-4 py-5 text-center text-sm text-gray-500">
+        © 2026 ROZEVA. All rights reserved.
+    </footer>
+
+    <script>
+        var cart = [];
+
+        var cartIcon = document.querySelector("#cartIcon");
+        var cartDrawer = document.querySelector("#cartDrawer");
+        var cartOverlay = document.querySelector("#cartOverlay");
+        var closeCart = document.querySelector("#closeCart");
+
+        var cartItems = document.querySelector("#cartItems");
+        var cartCount = document.querySelector("#cartCount");
+        var cartTotal = document.querySelector("#cartTotal");
+
+        if (cartIcon && cartDrawer && cartOverlay && closeCart) {
+
+            cartIcon.addEventListener("click", function () {
+                cartDrawer.classList.remove("translate-x-full");
+                cartOverlay.classList.remove("invisible", "opacity-0");
+            });
+
+            function hideCart() {
+                cartDrawer.classList.add("translate-x-full");
+                cartOverlay.classList.add("invisible", "opacity-0");
+            }
+
+            closeCart.addEventListener("click", hideCart);
+            cartOverlay.addEventListener("click", hideCart);
+        }
+
+        document.querySelectorAll(".addToCart").forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                var card = button.closest(".p-4");
+
+                if (!card) {
+                    alert("Product card nahi mila!");
+                    return;
+                }
+
+                var heading = card.querySelector("h1");
+                var image = card.querySelector("img");
+                var price = Number(button.getAttribute("data-price"));
+
+                if (!heading || !image || !Number.isFinite(price)) {
+                    alert("Product name, image ya price check karein.");
+                    return;
+                }
+
+                var name = heading.textContent.trim();
+                var imagePath = image.getAttribute("src");
+
+                var found = cart.find(function (item) {
+                    return item.name === name && item.image === imagePath;
+                });
+
+                if (found) {
+                    found.quantity++;
+                } else {
+                    cart.push({
+                        name: name,
+                        image: imagePath,
+                        price: price,
+                        quantity: 1
+                    });
+                }
+
+                renderCart();
+
+                if (cartDrawer && cartOverlay) {
+                    cartDrawer.classList.remove("translate-x-full");
+                    cartOverlay.classList.remove("invisible", "opacity-0");
+                }
+            });
+        });
+
+        function renderCart() {
+            cartItems.innerHTML = "";
+
+            var total = 0;
+            var count = 0;
+
+            cart.forEach(function (item, index) {
+                total += item.price * item.quantity;
+                count += item.quantity;
+
+                var row = document.createElement("div");
+                row.className = "mb-4 flex items-center gap-3 rounded-lg border p-3";
+
+                var img = document.createElement("img");
+                img.src = item.image;
+                img.alt = item.name;
+                img.className = "h-16 w-16 rounded object-cover";
+
+                var info = document.createElement("div");
+                info.className = "flex-1";
+
+                var title = document.createElement("p");
+                title.className = "font-semibold";
+                title.textContent = item.name;
+
+                var amount = document.createElement("p");
+                amount.className = "text-pink-600";
+                amount.textContent = "Rs. " + item.price.toLocaleString("en-PK");
+
+                var controls = document.createElement("div");
+                controls.className = "mt-2 flex items-center gap-2";
+
+                var minus = document.createElement("button");
+                minus.textContent = "−";
+                minus.className = "rounded bg-pink-100 px-3 py-1";
+                minus.addEventListener("click", function () {
+                    item.quantity--;
+                    if (item.quantity <= 0) {
+                        cart.splice(index, 1);
+                    }
+                    renderCart();
+                });
+
+                var qty = document.createElement("span");
+                qty.textContent = item.quantity;
+
+                var plus = document.createElement("button");
+                plus.textContent = "+";
+                plus.className = "rounded bg-pink-100 px-3 py-1";
+                plus.addEventListener("click", function () {
+                    item.quantity++;
+                    renderCart();
+                });
+
+                var remove = document.createElement("button");
+                remove.textContent = "Remove";
+                remove.className = "text-sm text-red-500";
+                remove.addEventListener("click", function () {
+                    cart.splice(index, 1);
+                    renderCart();
+                });
+
+                controls.append(minus, qty, plus, remove);
+                info.append(title, amount, controls);
+                row.append(img, info);
+                cartItems.appendChild(row);
+            });
+
+            cartCount.textContent = count;
+            cartTotal.textContent = "Rs. " + total.toLocaleString("en-PK");
+        }
+    </script>
+
+</body>
+
+</html>

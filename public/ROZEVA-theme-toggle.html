@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROZEVA | The Best Destination For Everyone</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+      margin: 0;
+
+      padding: 0px;
+
+      font-family: Arial, sans-serif;
+
+    }
+
+
+
+    .car-18 {
+
+      width: 100%;
+
+    }
+
+
+
+    .car-18__cmp {
+
+      position: relative;
+
+      width: 100%;
+
+      max-width: 900px;
+
+      margin: 0;
+
+      overflow: hidden;
+
+      aspect-ratio: 3 / 2;
+
+      --pos: 50;
+
+    }
+
+
+
+    .car-18__img {
+
+      position: absolute;
+
+      inset: 0;
+
+      display: block;
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+
+
+    .car-18__img--after {
+
+      z-index: 1;
+
+    }
+
+
+
+    .car-18__img--before {
+
+      z-index: 2;
+
+      clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+
+    }
+
+
+
+    .car-18__line {
+
+      position: absolute;
+
+      z-index: 3;
+
+      top: 0;
+
+      bottom: 0;
+
+      left: var(--pos);
+
+      width: 3px;
+
+      background: white;
+
+      transform: translateX(-50%);
+
+      pointer-events: none;
+
+    }
+
+
+
+    .car-18__knob {
+
+      position: absolute;
+
+      top: 50%;
+
+      left: 50%;
+
+      width: 44px;
+
+      height: 44px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      transform: translate(-50%, -50%);
+
+      border: 2px solid white;
+
+      border-radius: 50%;
+
+      background: white;
+
+      color: #333;
+
+      font-size: 24px;
+
+      box-shadow: 0 1px 8px #0004;
+
+    }
+
+
+
+    .car-18__tag {
+
+      position: absolute;
+
+      z-index: 4;
+
+      top: 15px;
+
+      padding: 10px;
+
+      border-radius: 5px;
+
+      background: #0009;
+
+      color: white;
+
+      font-size: 14px;
+
+      line-height: normal;
+
+      pointer-events: none;
+
+    }
+
+
+
+    .car-18__tag--b {
+
+      left: 15px;
+
+    }
+
+
+
+    .car-18__tag--a {
+
+      right: 15px;
+
+    }
+
+
+
+    .car-18__range {
+
+      position: absolute;
+
+      z-index: 5;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      margin: 0;
+
+      opacity: 0;
+
+      cursor: ew-resize;
+
+      touch-action: pan-y;
+
+    }
+
+
+
+    @media (max-width: 600px) {
+
+      body {
+
+        padding: 10px;
+
+      }
+
+
+
+      .car-18__knob {
+
+        width: 36px;
+
+        height: 36px;
+
+        font-size: 20px;
+
+      }
+
+    }
+
+
+
+    .slider {
+
+      position: relative;
+
+      width: 100%;
+
+    }
+
+
+
+    .slider input {
+
+      position: absolute;
+
+      width: 100%;
+
+      top: 50%;
+
+      left: 0;
+
+      cursor: ew-resize;
+
+    }
+
+
+
+    .banner-track {
+
+      animation: slideBanner 9s infinite;
+
+    }
+
+
+
+    @keyframes slideBanner {
+
+
+
+      0%,
+
+      30% {
+
+        transform: translateX(0);
+
+      }
+
+
+
+      33%,
+
+      63% {
+
+        transform: translateX(-33.3333%);
+
+      }
+
+
+
+      66%,
+
+      96% {
+
+        transform: translateX(-66.6666%);
+
+      }
+
+
+
+      100% {
+
+        transform: translateX(0);
+
+      }
+
+    }
+
+
+
+
+
+    .tr-01,
+
+    .tr-01 *,
+
+    .tr-01 *::before,
+
+    .tr-01 *::after {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+
+    .tr-01 {
+
+      width: 100%;
+
+      min-height: 100vh;
+
+      min-height: 100svh;
+
+      display: block;
+
+      --tr-01-bg: oklch(0.97 0.012 85);
+
+      --tr-01-card: oklch(1 0 0);
+
+      --tr-01-ink: oklch(0.24 0.02 60);
+
+      --tr-01-mut: oklch(0.55 0.02 60);
+
+      --tr-01-acc: oklch(0.62 0.19 28);
+
+      --tr-01-star: oklch(0.76 0.16 72);
+
+      background: var(--tr-01-bg);
+
+      color: var(--tr-01-ink);
+
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+
+    }
+
+
+
+    .tr-01__stage {
+
+      min-height: 100vh;
+
+      min-height: 100svh;
+
+      display: grid;
+
+      place-items: center;
+
+      align-content: center;
+
+      gap: clamp(20px, 3vw, 30px);
+
+      padding: clamp(22px, 5vw, 64px);
+
+    }
+
+
+
+    .tr-01__head {
+
+      width: min(100%, 1120px);
+
+      display: grid;
+
+      justify-items: center;
+
+      gap: 14px;
+
+      text-align: center;
+
+    }
+
+
+
+    .tr-01__eyebrow {
+
+      font-size: 11.5px;
+
+      font-weight: 700;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+
+      color: var(--tr-01-acc);
+
+    }
+
+
+
+    .tr-01__title {
+
+      font-size: clamp(25px, 4vw, 44px);
+
+      font-weight: 670;
+
+      line-height: 1.08;
+
+      letter-spacing: -.035em;
+
+      text-wrap: balance;
+
+      max-width: 20ch;
+
+    }
+
+
+
+    .tr-01__filters {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      margin-top: 4px;
+
+    }
+
+
+
+    .tr-01__sr {
+
+      position: absolute;
+
+      width: 1px;
+
+      height: 1px;
+
+      overflow: hidden;
+
+      clip-path: inset(50%);
+
+      white-space: nowrap;
+
+    }
+
+
+
+    .tr-01__chip:is(label) {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      min-height: 44px;
+
+      padding: 0 18px;
+
+      border-radius: 99px;
+
+      border: 1px solid oklch(0 0 0/.12);
+
+      background: var(--tr-01-card);
+
+      font-size: 13.5px;
+
+      font-weight: 560;
+
+      cursor: pointer;
+
+      user-select: none;
+
+      transition: background .22s, color .22s, border-color .22s, transform .22s cubic-bezier(.16, 1, .3, 1);
+
+    }
+
+
+
+    .tr-01__chip span {
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      padding: 2px 7px;
+
+      border-radius: 99px;
+
+      background: oklch(0 0 0/.06);
+
+      color: var(--tr-01-mut);
+
+    }
+
+
+
+    .tr-01__chip:hover {
+
+      transform: translateY(-1px);
+
+      border-color: color-mix(in oklch, var(--tr-01-acc) 45%, transparent);
+
+    }
+
+
+
+    .tr-01__sr:checked+.tr-01__chip {
+
+      background: var(--tr-01-ink);
+
+      color: oklch(0.99 0 0);
+
+      border-color: var(--tr-01-ink);
+
+    }
+
+
+
+    .tr-01__sr:checked+.tr-01__chip span {
+
+      background: oklch(1 0 0/.18);
+
+      color: oklch(1 0 0/.85);
+
+    }
+
+
+
+    .tr-01__sr:focus-visible+.tr-01__chip {
+
+      outline: 3px solid var(--tr-01-acc);
+
+      outline-offset: 3px;
+
+    }
+
+
+
+    .tr-01__wall {
+
+      width: min(100%, 1120px);
+
+      column-count: 3;
+
+      column-gap: 18px;
+
+    }
+
+
+
+    @media (max-width: 900px) {
+
+      .tr-01__wall {
+
+        column-count: 2;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 620px) {
+
+      .tr-01__wall {
+
+        column-count: 1;
+
+      }
+
+    }
+
+
+
+    .tr-01__card {
+
+      break-inside: avoid;
+
+      -webkit-column-break-inside: avoid;
+
+      margin-bottom: 18px;
+
+      padding: 22px 22px 20px;
+
+      border-radius: 18px;
+
+      background: var(--tr-01-card);
+
+      border: 1px solid oklch(0 0 0/.07);
+
+      box-shadow: 0 1px 2px oklch(0 0 0/.05), 0 12px 28px -18px oklch(0.3 0.06 60/.5);
+
+      animation: tr-01-in .7s cubic-bezier(.16, 1, .3, 1) both;
+
+      animation-delay: calc(var(--tr-01-i, 0)*70ms);
+
+      transition: box-shadow .3s, translate .3s cubic-bezier(.16, 1, .3, 1), border-color .3s;
+
+    }
+
+
+
+    .tr-01__card:hover {
+
+      translate: 0 -3px;
+
+      border-color: color-mix(in oklch, var(--tr-01-acc) 35%, transparent);
+
+      box-shadow: 0 2px 4px oklch(0 0 0/.05), 0 22px 44px -22px oklch(0.3 0.06 60/.6);
+
+    }
+
+
+
+    .tr-01__card--accent {
+
+      background: linear-gradient(165deg, color-mix(in oklch, var(--tr-01-acc) 13%, var(--tr-01-card)), var(--tr-01-card) 70%);
+
+      border-color: color-mix(in oklch, var(--tr-01-acc) 30%, transparent);
+
+    }
+
+
+
+    @keyframes tr-01-in {
+
+      from {
+
+        opacity: 0;
+
+        translate: 0 16px;
+
+      }
+
+
+
+      to {
+
+        opacity: 1;
+
+        translate: 0 0;
+
+      }
+
+    }
+
+
+
+    .tr-01__stars {
+
+      display: flex;
+
+      gap: 2px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+
+    .tr-01__stars svg {
+
+      width: 15px;
+
+      height: 15px;
+
+      fill: var(--tr-01-star);
+
+    }
+
+
+
+    .tr-01__off {
+
+      fill: oklch(0 0 0/.13);
+
+    }
+
+
+
+    .tr-01__quote p {
+
+      font-size: 15.5px;
+
+      line-height: 1.55;
+
+      letter-spacing: -.012em;
+
+      text-wrap: pretty;
+
+      color: color-mix(in oklch, var(--tr-01-ink) 92%, transparent);
+
+    }
+
+
+
+    .tr-01__who {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      margin-top: 18px;
+
+      padding-top: 15px;
+
+      border-top: 1px solid oklch(0 0 0/.07);
+
+    }
+
+
+
+    .tr-01__ava {
+
+      width: 40px;
+
+      height: 40px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      background: linear-gradient(135deg, oklch(0.85 0.05 60), oklch(0.75 0.08 28));
+
+      flex: none;
+
+    }
+
+
+
+    .tr-01__who span {
+
+      display: grid;
+
+      font-size: 12.5px;
+
+      line-height: 1.35;
+
+      color: var(--tr-01-mut);
+
+    }
+
+
+
+    .tr-01__who b {
+
+      font-size: 14px;
+
+      font-weight: 640;
+
+      color: var(--tr-01-ink);
+
+      letter-spacing: -.01em;
+
+    }
+
+
+
+    .tr-01:has(#tr-01-product:checked) .tr-01__card:not([data-src='product']),
+
+    .tr-01:has(#tr-01-support:checked) .tr-01__card:not([data-src='support']),
+
+    .tr-01:has(#tr-01-migration:checked) .tr-01__card:not([data-src='migration']) {
+
+      display: none;
+
+    }
+
+
+
+    .tr-01__chip:not(label) {
+
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+
+      font-size: 11.5px;
+
+      color: var(--tr-01-mut);
+
+      padding: 8px 15px;
+
+      border: 1px solid oklch(0 0 0/.11);
+
+      border-radius: 99px;
+
+      background: color-mix(in oklch, var(--tr-01-card) 60%, transparent);
+
+    }
+
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .tr-01__card {
+
+        animation: none;
+
+      }
+
+
+
+      .tr-01__card:hover {
+
+        translate: none;
+
+      }
+
+    }
+
+  
+
+    /* Light / dark theme colors */
+    :root {
+      color-scheme: light;
+      --site-bg: #fffafd;
+      --site-text: #352633;
+      --site-card: #ffffff;
+      --site-border: #f3d5e5;
+    }
+
+    body {
+      background-color: var(--site-bg);
+      color: var(--site-text);
+      transition: background-color .3s ease, color .3s ease;
+    }
+
+    body.dark-theme {
+      color-scheme: dark;
+      --site-bg: #17121b;
+      --site-text: #fceaf4;
+      --site-card: #251b2a;
+      --site-border: #54394d;
+    }
+
+    #themeToggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border: 1px solid rgb(255 255 255 / 45%);
+      border-radius: 9999px;
+      background: rgb(20 15 25 / 28%);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform .25s ease, background-color .25s ease;
+    }
+
+    #themeToggle:hover {
+      transform: rotate(12deg) scale(1.07);
+      background: rgb(20 15 25 / 48%);
+    }
+
+    #themeToggle:focus-visible {
+      outline: 3px solid #f9a8d4;
+      outline-offset: 3px;
+    }
+
+    body.dark-theme .car-18 {
+      background-color: var(--site-bg);
+    }
+
+    body.dark-theme footer {
+      background-color: #251725 !important;
+      border-color: #51374b !important;
+      color: #f9a8d4 !important;
+    }
+
+    body.dark-theme .tr-01 {
+      --tr-01-bg: #17121b;
+      --tr-01-card: #251b2a;
+      --tr-01-ink: #f8eaf3;
+      --tr-01-mut: #c7adbf;
+      --tr-01-acc: #fb8fc8;
+      --tr-01-star: #f7c96b;
+      background: var(--tr-01-bg);
+      color: var(--tr-01-ink);
+    }
+
+    body.dark-theme .tr-01__card {
+      background-color: var(--site-card);
+      border-color: var(--site-border);
+      box-shadow: 0 8px 28px rgb(0 0 0 / 22%);
+    }
+
+    body.dark-theme .tr-01__card--accent {
+      background: linear-gradient(165deg, #3b2439, var(--site-card) 75%);
+      border-color: #80506f;
+    }
+
+    body.dark-theme .tr-01__quote p,
+    body.dark-theme .tr-01__who b {
+      color: var(--site-text);
+    }
+
+    body.dark-theme .tr-01__who {
+      border-color: var(--site-border);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body, #themeToggle {
+        transition: none;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+
+<body class="m-0 p-0 relative">
+
+  <!-- header -->
+
+  <header class="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 py-7 sm:px-12">
+
+    <a href="#" class="text-2xl font-bold tracking-[-0.04em] text-white">ROZEVA<span class="text-tnv13-acc">.</span></a>
+
+    <nav aria-label="Main" class="hidden md:block">
+
+      <ul
+
+        class="flex items-center gap-2 text-[15px] font-medium text-tnv13-mut [&_a]:relative [&_a]:block [&_a]:rounded-xl [&_a]:px-4 [&_a]:py-2.5 [&_a]:[--tnv13-dx:0px] [&_a]:[--tnv13-dy:0px] [&_a]:translate-x-(--tnv13-dx) [&_a]:translate-y-(--tnv13-dy) [&_a]:transition-colors [&_a]:before:absolute [&_a]:before:inset-0 [&_a]:before:-z-10 [&_a]:before:scale-75 [&_a]:before:rounded-xl [&_a]:before:bg-white/[0.06] [&_a]:before:opacity-0 [&_a]:before:transition-[scale,opacity] [&_a]:before:duration-300 [&_a]:before:ease-[cubic-bezier(.34,1.56,.64,1)] [&_a]:before:content-[''] [&_a:hover]:text-white [&_a:hover]:before:scale-100 [&_a:hover]:before:opacity-100 [&_a:focus-visible]:text-white [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-tnv13-acc [&_a[aria-current]]:text-white [&_span]:block [&_span]:translate-x-[calc(var(--tnv13-dx)*0.6)] [&_span]:translate-y-[calc(var(--tnv13-dy)*0.6)]">
+
+        <li><a href="index.html" data-magnet aria-current="page"><span>Home</span></a></li>
+
+        <li><a href="product.html" data-magnet><span>Products</span></a></li>
+
+        <li><a href="contact.html" data-magnet><span>Contact</span></a></li>
+
+        <li><a href="reviews.html" data-magnet><span>Reviews</span></a></li>
+
+      </ul>
+
+    </nav>
+
+  
+    <button id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
+      <span id="themeIcon" aria-hidden="true">☾</span>
+    </button>
+  </header>
+
+  <!--Banners-->
+
+  <div class="w-full overflow-hidden m-0 p-0">
+
+    <div class="banner-track flex w-[300%]">
+
+
+
+      <!-- Banner 1 -->
+
+      <div class="flex w-1/3 shrink-0 flex-col items-center justify-center h-[630px] text-center text-white">
+
+        <img src="./images/banner 1.png">
+
+      </div>
+
+
+
+      <!-- Banner 2 -->
+
+      <div class="flex w-1/3 shrink-0 flex-col items-center justify-center h-[630px] text-center text-white">
+
+        <img src="./images/banner 2.png">
+
+      </div>
+
+
+
+      <!-- Banner 3 -->
+
+      <div class="flex w-1/3 shrink-0 flex-col items-center justify-center h-[630px] text-center text-white">
+
+        <img src="./images/banner 3.png">
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <!--Before After-->
+
+  <section class="car-18" aria-label="Before and after comparison">
+
+    <figure class="car-18__cmp" style="--pos:50%">
+
+      <img class="car-18__img car-18__img--after" src="/public/images/Untitled Design.png" width="600" height="400"
+
+        alt="After: colour-graded edit">
+
+      <img class="car-18__img car-18__img--before" src="/public/images/Untitled Design (1).png" width="600" height="400"
+
+        alt="Before: original photo">
+
+      <span class="car-18__line" aria-hidden="true"><span class="car-18__knob">⇔</span></span>
+
+      <span class="car-18__tag car-18__tag--b" aria-hidden="true">Before</span>
+
+      <span class="car-18__tag car-18__tag--a" aria-hidden="true">After</span>
+
+      <input class="car-18__range" type="range" min="0" max="100" value="50"
+
+        aria-label="Reveal amount: drag to compare before and after">
+
+    </figure>
+
+  </section>
+
+
+
+
+
+  <footer class="border-t border-pink-200 bg-pink-100 px-5 py-6 text-center text-sm text-pink-800">
+
+    © 2026 ROZEVA. All rights reserved.
+
+  </footer>
+
+
+
+
+
+  <script>
+
+    // Moon / sun theme toggle. The user's choice is remembered in this browser.
+    (function () {
+      var themeToggle = document.querySelector("#themeToggle");
+      var themeIcon = document.querySelector("#themeIcon");
+
+      if (!themeToggle || !themeIcon) return;
+
+      function applyTheme(theme) {
+        var isDark = theme === "dark";
+        document.body.classList.toggle("dark-theme", isDark);
+        themeIcon.textContent = isDark ? "☀" : "☾";
+        themeToggle.setAttribute(
+          "aria-label",
+          isDark ? "Switch to light theme" : "Switch to dark theme"
+        );
+        themeToggle.title = isDark ? "Switch to light theme" : "Switch to dark theme";
+      }
+
+      var savedTheme = "light";
+      try {
+        savedTheme = localStorage.getItem("rozevaTheme") || "light";
+      } catch (error) {
+        savedTheme = "light";
+      }
+      applyTheme(savedTheme);
+
+      themeToggle.addEventListener("click", function () {
+        var nextTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
+        applyTheme(nextTheme);
+        try {
+          localStorage.setItem("rozevaTheme", nextTheme);
+        } catch (error) {
+          // Theme still works for this page if browser storage is unavailable.
+        }
+      });
+    })();
+
+
+
+
+    (() => {
+
+      const root = document.querySelector('.tnv-13');
+
+      if (!root || root.dataset.wired) return;
+
+      root.dataset.wired = '1';
+
+      const magnetic = matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const els = [...root.querySelectorAll('[data-magnet]')];
+
+      const st = els.map(() => ({ x: 0, y: 0 }));
+
+      const RADIUS = 90, PULL = 0.3, MAX = 14, EASE = 0.18;
+
+      const clamp = (v) => Math.max(-MAX, Math.min(MAX, v));
+
+      let px = -1e4, py = -1e4, raf = 0;
+
+      const frame = () => {
+
+        raf = 0;
+
+        let busy = false;
+
+        els.forEach((el, i) => {
+
+          const s = st[i];
+
+          const r = el.getBoundingClientRect();
+
+          const cx = r.left - s.x + r.width / 2, cy = r.top - s.y + r.height / 2;
+
+          const dx = px - cx, dy = py - cy;
+
+          const near = Math.hypot(dx, dy) < RADIUS + r.width / 2;
+
+          const tx = near ? clamp(dx * PULL) : 0, ty = near ? clamp(dy * PULL) : 0;
+
+          s.x += (tx - s.x) * EASE;
+
+          s.y += (ty - s.y) * EASE;
+
+          if (Math.abs(tx - s.x) > 0.05 || Math.abs(ty - s.y) > 0.05) busy = true;
+
+          el.style.setProperty('--tnv13-dx', s.x.toFixed(2) + 'px');
+
+          el.style.setProperty('--tnv13-dy', s.y.toFixed(2) + 'px');
+
+        });
+
+        if (busy) raf = requestAnimationFrame(frame);
+
+      };
+
+      const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+
+      root.addEventListener('pointermove', (e) => {
+
+        const b = root.getBoundingClientRect();
+
+        root.style.setProperty('--tnv13-mx', (e.clientX - b.left) + 'px');
+
+        root.style.setProperty('--tnv13-my', (e.clientY - b.top) + 'px');
+
+        if (magnetic) { px = e.clientX; py = e.clientY; kick(); }
+
+      }, { passive: true });
+
+      root.addEventListener('pointerleave', () => { px = py = -1e4; kick(); });
+
+    })();
+
+
+
+    document.querySelectorAll('.car-18__cmp').forEach(function (cmp) {
+
+      var range = cmp.querySelector('.car-18__range');
+
+
+
+      function sync() {
+
+        cmp.style.setProperty('--pos', range.value + '%');
+
+      }
+
+
+
+      range.addEventListener('input', sync);
+
+      range.addEventListener('change', sync);
+
+
+
+      sync();
+
+    });
+
+
+
+
+
+    var stars = document.querySelectorAll("#stars button");
+
+    var selectedRating = 0;
+
+
+
+    var photoInput = document.querySelector("#photo");
+
+    var photoPreview = document.querySelector("#photoPreview");
+
+    var previewContainer = document.querySelector("#previewContainer");
+
+    var removePhoto = document.querySelector("#removePhoto");
+
+
+
+    var reviewForm = document.querySelector("#reviewForm");
+
+    var reviewsList = document.querySelector("#reviewsList");
+
+    var emptyMessage = document.querySelector("#emptyMessage");
+
+    var ratingText = document.querySelector("#ratingText");
+
+
+
+    var selectedPhoto = "";
+
+
+
+    var ratingLabels = [
+
+      "",
+
+      "Poor",
+
+      "Fair",
+
+      "Good",
+
+      "Very Good",
+
+      "Excellent"
+
+    ];
+
+
+
+    // Star Rating
+
+    stars.forEach(function (star) {
+
+      star.addEventListener("click", function () {
+
+        selectedRating = Number(star.dataset.value);
+
+
+
+        stars.forEach(function (item) {
+
+          if (Number(item.dataset.value) <= selectedRating) {
+
+            item.classList.remove("text-gray-300");
+
+            item.classList.add("text-amber-400");
+
+          } else {
+
+            item.classList.remove("text-amber-400");
+
+            item.classList.add("text-gray-300");
+
+          }
+
+        });
+
+
+
+        ratingText.textContent = ratingLabels[selectedRating];
+
+      });
+
+    });
+
+
+
+    // Choose Photo
+
+    photoInput.addEventListener("change", function () {
+
+      var file = photoInput.files[0];
+
+
+
+      if (!file) {
+
+        return;
+
+      }
+
+
+
+      if (!file.type.startsWith("image/")) {
+
+        alert("Please choose an image file.");
+
+        photoInput.value = "";
+
+        return;
+
+      }
+
+
+
+      if (file.size > 2 * 1024 * 1024) {
+
+        alert("Please choose an image smaller than 2 MB.");
+
+        photoInput.value = "";
+
+        return;
+
+      }
+
+
+
+      var reader = new FileReader();
+
+
+
+      reader.onload = function () {
+
+        selectedPhoto = reader.result;
+
+        photoPreview.src = selectedPhoto;
+
+        previewContainer.classList.remove("hidden");
+
+      };
+
+
+
+      reader.readAsDataURL(file);
+
+    });
+
+
+
+    // Remove Photo
+
+    removePhoto.addEventListener("click", function () {
+
+      photoInput.value = "";
+
+      selectedPhoto = "";
+
+
+
+      photoPreview.removeAttribute("src");
+
+      previewContainer.classList.add("hidden");
+
+    });
+
+
+
+    // Display Review
+
+    function displayReview(name, rating, message, photo) {
+
+      var card = document.createElement("article");
+
+
+
+      card.className =
+
+        "overflow-hidden rounded-2xl border border-pink-100 bg-white p-6 shadow-md transition hover:shadow-xl";
+
+
+
+      var heading = document.createElement("h3");
+
+      heading.className =
+
+        "mb-3 break-words text-xl font-bold text-pink-700";
+
+      heading.textContent = name;
+
+
+
+      var ratingElement = document.createElement("div");
+
+      ratingElement.className = "mb-3 text-2xl text-amber-400";
+
+      ratingElement.textContent =
+
+        "★".repeat(rating) + "☆".repeat(5 - rating);
+
+
+
+      var review = document.createElement("p");
+
+      review.className =
+
+        "whitespace-pre-wrap break-words leading-7 text-gray-600";
+
+      review.textContent = message;
+
+
+
+      card.appendChild(heading);
+
+      card.appendChild(ratingElement);
+
+      card.appendChild(review);
+
+
+
+      if (photo) {
+
+        var image = document.createElement("img");
+
+
+
+        image.src = photo;
+
+        image.alt = "Customer review photo";
+
+        image.className =
+
+          "mt-5 max-h-72 w-full rounded-xl bg-pink-50 object-contain";
+
+
+
+        card.appendChild(image);
+
+      }
+
+
+
+      reviewsList.prepend(card);
+
+    }
+
+
+
+    // Load Reviews from Local Storage
+
+    var savedReviews = [];
+
+
+
+    try {
+
+      savedReviews = JSON.parse(
+
+        localStorage.getItem("rozevaReviews") || "[]"
+
+      );
+
+
+
+      if (!Array.isArray(savedReviews)) {
+
+        savedReviews = [];
+
+      }
+
+    } catch (error) {
+
+      savedReviews = [];
+
+    }
+
+
+
+    savedReviews.forEach(function (item) {
+
+      if (
+
+        item &&
+
+        typeof item.name === "string" &&
+
+        Number.isInteger(item.rating) &&
+
+        item.rating >= 1 &&
+
+        item.rating <= 5 &&
+
+        typeof item.message === "string"
+
+      ) {
+
+        displayReview(
+
+          item.name,
+
+          item.rating,
+
+          item.message,
+
+          typeof item.photo === "string" ? item.photo : ""
+
+        );
+
+      }
+
+    });
+
+
+
+    if (reviewsList.querySelector("article")) {
+
+      emptyMessage.classList.add("hidden");
+
+    }
+
+
+
+    // Send Review
+
+    reviewForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+
+
+      var name = document.querySelector("#customerName").value.trim();
+
+      var message = document.querySelector("#reviewText").value.trim();
+
+
+
+      if (selectedRating === 0) {
+
+        alert("Please select a star rating.");
+
+        return;
+
+      }
+
+
+
+      if (name === "" || message === "") {
+
+        alert("Please enter your name and review.");
+
+        return;
+
+      }
+
+
+
+      var newReview = {
+
+        name: name,
+
+        rating: selectedRating,
+
+        message: message,
+
+        photo: selectedPhoto
+
+      };
+
+
+
+      emptyMessage.classList.add("hidden");
+
+
+
+      displayReview(
+
+        newReview.name,
+
+        newReview.rating,
+
+        newReview.message,
+
+        newReview.photo
+
+      );
+
+
+
+      savedReviews.unshift(newReview);
+
+
+
+      try {
+
+        localStorage.setItem(
+
+          "rozevaReviews",
+
+          JSON.stringify(savedReviews)
+
+        );
+
+      } catch (error) {
+
+        alert(
+
+          "Review displayed, but could not be saved in browser storage."
+
+        );
+
+      }
+
+
+
+      // Reset Form
+
+      reviewForm.reset();
+
+
+
+      selectedRating = 0;
+
+      selectedPhoto = "";
+
+
+
+      photoPreview.removeAttribute("src");
+
+      previewContainer.classList.add("hidden");
+
+
+
+      stars.forEach(function (star) {
+
+        star.classList.remove("text-amber-400");
+
+        star.classList.add("text-gray-300");
+
+      });
+
+
+
+      ratingText.textContent = "Select your rating";
+
+    });
+
+  </script>
+
+
+
+</body>
+
+
+
+</html>

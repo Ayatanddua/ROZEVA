@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROZEVA | Makeup</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <header class="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 py-7 sm:px-12 block">
+        <a href="#" class="text-2xl font-bold tracking-[-0.04em] text-white block">ROZEVA</a>
+        <nav aria-label="Main" class="hidden md:block">
+            <ul
+                class="flex items-center gap-2 text-[15px] font-medium text-tnv13-mut [&_a]:relative [&_a]:block [&_a]:rounded-xl [&_a]:px-4 [&_a]:py-2.5 [&_a]:[--tnv13-dx:0px] [&_a]:[--tnv13-dy:0px] [&_a]:translate-x-(--tnv13-dx) [&_a]:translate-y-(--tnv13-dy) [&_a]:transition-colors [&_a]:before:absolute [&_a]:before:inset-0 [&_a]:before:-z-10 [&_a]:before:scale-75 [&_a]:before:rounded-xl [&_a]:before:bg-white/[0.06] [&_a]:before:opacity-0 [&_a]:before:transition-[scale,opacity] [&_a]:before:duration-300 [&_a]:before:ease-[cubic-bezier(.34,1.56,.64,1)] [&_a]:before:content-[''] [&_a:hover]:text-white [&_a:hover]:before:scale-100 [&_a:hover]:before:opacity-100 [&_a:focus-visible]:text-white [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-tnv13-acc [&_a[aria-current]]:text-white [&_span]:block [&_span]:translate-x-[calc(var(--tnv13-dx)*0.6)] [&_span]:translate-y-[calc(var(--tnv13-dy)*0.6)]">
+                <li><a href="index.html" data-magnet class="text-black block"><span>Home</span></a></li>
+                <li><a href="product.html" data-magnet aria-current="page" class="text-white"><span
+                            class="text-white">Products</span></a>
+                </li>
+                <li><a href="contact.html" data-magnet><span>Contact</span></a></li>
+                <li><a href="reviews.html" data-magnet><span>Reviews</span></a></li>
+            </ul>
+        </nav>
+        <button
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full py-2.5 text-[12px] sm:px-4 sm:text-[13px]"
+            id="open-cart" type="button" aria-controls="cart-overlay" aria-expanded="false">
+            <p>🛍</p>
+            <span
+                class="ml-0.5 inline-grid h-[21px] min-w-[21px] place-items-center rounded-full bg-rozeva-deep px-1 text-[11px] text-black"
+                id="bag-count">0</span>
+        </button>
+    </header>
+    <!-- Sliding cart drawer -->
+    <div class="fixed inset-0 z-50 hidden justify-end" id="cart-overlay" aria-hidden="true">
+        <button class="absolute inset-0 h-full w-full bg-black/40 opacity-0 transition-opacity duration-300 ease-out"
+            id="cart-scrim" type="button" aria-label="Close shopping bag"></button>
+        <aside
+            class="relative z-10 flex h-full w-full max-w-[560px] min-w-0 translate-x-full flex-col bg-rozeva-cream shadow-drawer transition-transform duration-300 ease-out"
+            id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+            <div
+                class="flex flex-none items-start justify-between gap-4 border-b border-rozeva-line bg-gradient-to-r from-pink-50 to-rozeva-cream px-5 py-5 sm:px-7 sm:pb-5 sm:pt-7">
+                <div>
+                    <div class="mb-2 text-[9px] font-bold tracking-[2px] text-rozeva-deep">ROZEVA · BEAUTY, WITH GRACE
+                    </div>
+                    <h2 class="mb-2 font-editorial text-[26px] font-normal leading-tight sm:text-[29px] text-white"
+                        id="drawer-title">Your Shopping Bag</h2>
+                    <div class="text-[11px] text-rozeva-muted" id="drawer-count">0 items in your bag</div>
+                </div>
+                <button
+                    class="grid h-[38px] w-[38px] flex-none place-items-center rounded-full border border-rozeva-line bg-white text-2xl leading-none text-rozeva-deep transition hover:bg-rozeva-rose"
+                    id="close-cart" type="button" aria-label="Close shopping bag">×</button>
+            </div>
+            <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-6 sm:px-7">
+                <section class="pt-1" id="cart" aria-label="Shopping cart">
+                    <div class="flex items-center justify-between gap-3 border-b border-rozeva-line py-4">
+                        <h3 class="font-editorial text-xl font-normal text-white">Your picks</h3><span
+                            class="text-xs text-rozeva-muted" id="items-label">0 items</span>
+                    </div>
+                    <div id="cart-items"></div>
+                    <div class="hidden py-7 text-center text-sm text-rozeva-muted" id="empty-state">
+                        <div class="text-4xl text-white">♡</div>
+                        <h3 class="my-2 font-editorial text-2xl font-normal text-rozeva-ink text-white">Your bag is
+                            taking a little
+                            break</h3>
+                        <p class="text-white">Add something lovely to get started.</p>
+                        <a class="mt-4 inline-block text-xs text-rozeva-deep underline underline-offset-4 text-white"
+                            href="#recommended" id="continue-empty">Explore beauty favourites</a>
+                    </div>
+                    <a class="mt-5 inline-flex items-center gap-2 text-xs font-bold text-rozeva-deep no-underline hover:underline"
+                        href="#recommended" id="continue-shopping">← CONTINUE SHOPPING</a>
+                </section>
+
+                <aside class="mt-5 rounded-2xl border border-rozeva-line bg-white p-5 shadow-sm" id="summary"
+                    aria-label="Order summary">
+                    <h3 class="mb-4 border-b border-rozeva-line pb-3 font-editorial text-[22px] font-normal">Order
+                        Summary</h3>
+                    <div class="my-3 flex justify-between gap-3 text-xs text-rozeva-muted"><span>Subtotal</span><strong
+                            class="text-rozeva-ink" id="subtotal">Rs. 0</strong></div>
+                    <div class="my-3 flex justify-between gap-3 text-xs text-rozeva-muted"><span>Delivery</span><strong
+                            class="text-rozeva-ink" id="delivery">Free</strong></div>
+                    <div class="my-3 flex justify-between gap-3 text-xs text-rozeva-muted"><span>Discount</span><strong
+                            class="text-rozeva-green" id="discount">− Rs. 0</strong></div>
+                    <div class="my-4 flex gap-2">
+                        <input
+                            class="min-w-0 flex-1 rounded-lg border border-rozeva-line bg-white px-3 py-3 text-xs outline-none placeholder:text-rozeva-muted focus:border-rozeva-pink"
+                            id="promo-input" type="text" maxlength="20" placeholder="Enter promo code"
+                            aria-label="Promo code">
+                        <button
+                            class="rounded-lg border border-pink-200 bg-rozeva-rose px-3 text-[11px] font-bold text-rozeva-deep transition hover:bg-pink-100"
+                            id="apply-promo" type="button">APPLY</button>
+                    </div>
+                    <div class="mb-4 text-[10px] text-rozeva-muted">Demo code: <b class="text-rozeva-deep">ROZEVA10</b>
+                        for 10% off products.</div>
+                    <div class="mb-4 mt-5 flex items-center justify-between gap-3 border-t border-rozeva-line pt-4">
+                        <span class="font-bold">Total</span><strong class="font-editorial text-[22px] text-rozeva-deep"
+                            id="grand-total">Rs. 0</strong>
+                    </div>
+                    <button
+                        class="w-full rounded-xl bg-rozeva-deep px-3 py-4 text-xs font-bold tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-[#84344f] disabled:cursor-not-allowed disabled:opacity-40"
+                        id="checkout-btn" type="button" disabled>CONTINUE TO CHECKOUT&nbsp; →</button>
+                    <div class="mt-3 hidden rounded-lg bg-pink-50 p-3 text-xs leading-relaxed text-[#813b54]"
+                        id="status-message" role="status" aria-live="polite"></div>
+                    <p class="mt-4 text-center text-[10px] leading-relaxed text-rozeva-muted">♡ Checkout is in demo
+                        mode.<br>No real payment details are collected.</p>
+                </aside>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Demo checkout modal -->
+    <div class="fixed inset-0 z-[60] hidden place-items-center overflow-y-auto bg-[#2f1922]/50 p-4" id="checkout-modal">
+        <section
+            class="relative my-auto max-h-[92vh] w-full max-w-[640px] overflow-y-auto rounded-2xl border border-rozeva-line bg-rozeva-cream p-5 shadow-modal sm:p-7"
+            role="dialog" aria-modal="true" aria-labelledby="checkout-heading">
+            <div class="mb-5 flex items-start justify-between gap-4 border-b border-rozeva-line pb-4">
+                <div>
+                    <h2 class="mb-2 font-editorial text-2xl font-normal sm:text-[29px]" id="checkout-heading">Complete
+                        your order</h2>
+                    <p class="text-xs leading-relaxed text-rozeva-muted">Just a few details to prepare your ROZEVA demo
+                        order.</p>
+                </div>
+                <button
+                    class="grid h-9 w-9 flex-none place-items-center rounded-full border border-rozeva-line bg-white text-2xl text-rozeva-deep"
+                    id="close-checkout" type="button" aria-label="Close checkout">×</button>
+            </div>
+            <form class="grid grid-cols-1 gap-4 sm:grid-cols-2" id="checkout-form">
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-name">Full
+                        name *</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-name" name="fullName" autocomplete="name" required maxlength="80"
+                        placeholder="Your full name"></div>
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-phone">Phone
+                        number *</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-phone" name="phone" autocomplete="tel" required inputmode="tel" maxlength="24"
+                        placeholder="03XX XXXXXXX"></div>
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-email">Email
+                        (optional)</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-email" name="email" type="email" autocomplete="email" maxlength="120"
+                        placeholder="you@example.com"></div>
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-city">City
+                        *</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-city" name="city" autocomplete="address-level2" required maxlength="60"
+                        placeholder="Your city"></div>
+                <div class="flex min-w-0 flex-col gap-2 sm:col-span-2"><label class="text-[11px] font-bold"
+                        for="customer-address">Delivery address *</label><textarea
+                        class="min-h-[76px] w-full resize-y rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-address" name="address" autocomplete="street-address" required maxlength="300"
+                        placeholder="House, street, area..."></textarea></div>
+                <div class="flex min-w-0 flex-col gap-2 sm:col-span-2"><label class="text-[11px] font-bold"
+                        for="payment-method">Demo payment method</label><select
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="payment-method" name="paymentMethod">
+                        <option value="Cash on Delivery (demo)">Cash on Delivery (demo)</option>
+                        <option value="Test checkout — no payment">Test checkout — no payment</option>
+                    </select></div>
+                <div class="rounded-lg bg-pink-50 p-3 text-[11px] leading-relaxed text-[#8d3d58] sm:col-span-2">Demo
+                    mode: this form does not send customer details to a shop, arrange delivery, or charge money. Do not
+                    enter sensitive information. A real store needs a secure backend and a payment/delivery setup.</div>
+                <button
+                    class="rounded-xl bg-rozeva-deep px-3 py-4 text-xs font-bold tracking-wide text-white transition hover:bg-[#84344f] sm:col-span-2"
+                    type="submit">PLACE DEMO ORDER&nbsp; ✓</button>
+            </form>
+            <div class="hidden py-4 text-center" id="checkout-success">
+                <div
+                    class="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-rozeva-rose text-3xl text-rozeva-deep">
+                    ✓</div>
+                <h3 class="mb-2 font-editorial text-3xl font-normal">Thank you, <span id="success-name"></span>!</h3>
+                <p class="text-xs leading-relaxed text-rozeva-muted">Your demo order has been created in this browser.
+                    It has not been sent to a real store.</p>
+                <div class="my-5 rounded-xl border border-rozeva-line bg-pink-50 p-4 text-left">
+                    <div class="my-2 flex justify-between gap-3 text-xs"><span>Demo order number</span><strong
+                            id="success-order-id"></strong></div>
+                    <div class="my-2 flex justify-between gap-3 text-xs"><span>Order date</span><strong
+                            id="success-date"></strong></div>
+                    <ul class="my-3 list-disc space-y-2 pl-5 text-xs leading-relaxed text-rozeva-muted"
+                        id="success-items"></ul>
+                    <div class="flex justify-between gap-3 border-t border-rozeva-line pt-3 text-sm font-bold">
+                        <span>Demo total</span><strong id="success-total"></strong>
+                    </div>
+                </div>
+                <button
+                    class="w-full rounded-xl bg-rozeva-deep px-3 py-4 text-xs font-bold tracking-wide text-white hover:bg-[#84344f]"
+                    type="button" id="finish-checkout">CONTINUE SHOPPING</button>
+                <p class="mt-3 text-[10px] text-rozeva-muted">No payment was taken. This receipt is for testing only.
+                </p>
+            </div>
+        </section>
+    </div>
+    <!--banner-->
+    <img src="./images/banner 1.png">
+    <!--Products-->
+    <section class="text-black body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/lipstick.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/images(2).jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Velvet Matte Lipstick</h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Velvet Matte Lipstick gives your lips a
+                                smooth, rich colour with a soft matte finish. Its elegant look is perfect for everyday
+                                wear and special occasions.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/foundation.html"></a><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/foundation.png"
+                            alt="blog">
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Flawless Glow Foundation
+                            </h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Foundation gives your skin a smooth,
+                                natural-looking finish for everyday beauty.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/facepowder.html"></a><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/face powder.png"
+                            alt="blog">
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Soft Touch Face Powder
+                            </h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Face Powder gives your skin a smooth, soft
+                                finish and helps reduce excess shine for a fresh, natural-looking appearance.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/lipgloss.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/lip gloss.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Shine Gloss Lip Gloss</h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Lip Gloss adds a beautiful shine to your
+                                lips with a smooth, glossy finish, perfect for enhancing your everyday look or special
+                                occasions.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/eyeliner.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/eye liner.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Precision Black Eyeliner
+                            </h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Eyeliner glides on smoothly to create
+                                rich, defined lines with an elegant finish, perfect for both everyday makeup and special
+                                occasions.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/mascara.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/mascara.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Volume Boost Mascara</h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Mascara enhances your lashes with a rich,
+                                defined look, adding beautiful volume and length for captivating eyes on any occasion.
+                            </p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/eyshadow.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/eye shadow.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Glamour Eyeshadow Palette
+                            </h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Eyeshadow Palette features beautiful,
+                                blendable shades that add depth and colour to your eyes, perfect for creating both
+                                natural and glamorous makeup looks.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/blush.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center"
+                            src="./images/blush and highlighter.png" alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Blush & Glow Highlighter
+                            </h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Blush & Highlighter adds a fresh flush of
+                                colour and a radiant glow to your cheeks.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/lipliner.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/lip liner.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Perfect Define Lip Liner
+                            </h1>
+                            <p class="leading-relaxed mb-3 text-black">ROZEVA Lip Liner defines your lips with smooth,
+                                rich colour for a neat and beautiful finish.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/primer.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/primer.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Flawless Face Primer</h1>
+                            <p class="leading-relaxed mb-3 text-black">Creates a smooth base for makeup, minimizes the
+                                appearance of pores, and helps your makeup last longer.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/concealer.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/Concealer.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Flawless Concealer</h1>
+                            <p class="leading-relaxed mb-3 text-black">Covers dark circles and blemishes while providing
+                                smooth, even-looking coverage for a fresh and flawless makeup look.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./product pages/contour.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/contour.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Sculpting Contour</h1>
+                            <p class="leading-relaxed mb-3 text-black">Adds natural-looking definition and dimension to
+                                your face, creating a beautifully sculpted look with a smooth, blendable finish.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipstick" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Products
+        var products = {
+            blush: {
+                name: "Velvet Glow Blush",
+                price: 1299
+            },
+
+            serum: {
+                name: "Radiance Face Serum",
+                price: 1899
+            },
+
+            lipstick: {
+                name: "Silk Matte Lip Color",
+                price: 999
+            }
+        };
+
+        var cart = {};
+        var discountApplied = false;
+
+        // Price format
+        function money(price) {
+            return "Rs. " + price.toLocaleString("en-PK");
+        }
+
+        // Show message
+        function showMessage(message) {
+            var box = document.getElementById("status-message");
+            box.textContent = message;
+            box.classList.remove("hidden");
+        }
+
+        // Update cart
+        function updateCart() {
+            var cartItems = document.getElementById("cart-items");
+
+            cartItems.innerHTML = "";
+
+            var subtotal = 0;
+            var quantity = 0;
+
+            for (var id in cart) {
+                var product = cart[id];
+
+                subtotal += product.price * product.quantity;
+                quantity += product.quantity;
+
+                var item = document.createElement("div");
+
+                item.className = "border-b border-rozeva-line py-4";
+
+                item.innerHTML = `
+            <h4 class="font-bold">${product.name}</h4>
+
+            <p>${money(product.price)}</p>
+
+            <button data-qty="${id}" data-change="-1">
+                -
+            </button>
+
+            <span class="px-3">${product.quantity}</span>
+
+            <button data-qty="${id}" data-change="1">
+                +
+            </button>
+
+            <button data-remove="${id}" class="ml-3 underline">
+                Remove
+            </button>
+        `;
+
+                cartItems.appendChild(item);
+            }
+
+            var discount = discountApplied
+                ? Math.round(subtotal * 0.10)
+                : 0;
+
+            var delivery = subtotal === 0 || subtotal >= 5000
+                ? 0
+                : 200;
+
+            document.getElementById("subtotal").textContent =
+                money(subtotal);
+
+            document.getElementById("delivery").textContent =
+                delivery === 0 ? "Free" : money(delivery);
+
+            document.getElementById("discount").textContent =
+                "- " + money(discount);
+
+            document.getElementById("grand-total").textContent =
+                money(subtotal + delivery - discount);
+
+            document.getElementById("bag-count").textContent = quantity;
+
+            document.getElementById("items-label").textContent =
+                quantity + (quantity === 1 ? " item" : " items");
+
+            document.getElementById("drawer-count").textContent =
+                quantity + " items in your bag";
+
+            document.getElementById("empty-state").classList.toggle(
+                "hidden",
+                quantity > 0
+            );
+
+            cartItems.classList.toggle("hidden", quantity === 0);
+
+            document.getElementById("checkout-btn").disabled =
+                quantity === 0;
+        }
+
+        // Add to cart
+        document.querySelectorAll("[data-add]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var id = button.dataset.add;
+
+                if (cart[id]) {
+                    cart[id].quantity++;
+                } else {
+                    cart[id] = {
+                        ...products[id],
+                        quantity: 1
+                    };
+                }
+
+                updateCart();
+                openCart();
+
+                showMessage(products[id].name + " added to your bag.");
+            });
+        });
+
+        // Increase, decrease or remove items
+        document.getElementById("cart-items").addEventListener(
+            "click",
+            function (event) {
+                var button = event.target;
+
+                if (button.dataset.qty) {
+                    var id = button.dataset.qty;
+
+                    cart[id].quantity += Number(button.dataset.change);
+
+                    if (cart[id].quantity < 1) {
+                        cart[id].quantity = 1;
+                    }
+
+                    updateCart();
+                }
+
+                if (button.dataset.remove) {
+                    delete cart[button.dataset.remove];
+                    updateCart();
+                    showMessage("Product removed from your bag.");
+                }
+            }
+        );
+
+        // Open cart
+        function openCart() {
+            var overlay = document.getElementById("cart-overlay");
+            var drawer = document.getElementById("cart-drawer");
+
+            overlay.classList.remove("hidden");
+            overlay.classList.add("flex");
+            overlay.setAttribute("aria-hidden", "false");
+
+            drawer.classList.remove("translate-x-full");
+            drawer.classList.add("translate-x-0");
+
+            document.body.style.overflow = "hidden";
+        }
+
+        // Close cart
+        function closeCart() {
+            var overlay = document.getElementById("cart-overlay");
+            var drawer = document.getElementById("cart-drawer");
+
+            drawer.classList.remove("translate-x-0");
+            drawer.classList.add("translate-x-full");
+
+            overlay.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+
+            // Hide after the slide animation finishes
+            function hideCart(event) {
+                if (event.target !== drawer) return;
+
+                if (overlay.getAttribute("aria-hidden") === "true") {
+                    overlay.classList.add("hidden");
+                    overlay.classList.remove("flex");
+                }
+
+                drawer.removeEventListener("transitionend", hideCart);
+            }
+
+            drawer.addEventListener("transitionend", hideCart);
+        }
+
+        // Cart buttons
+        document.getElementById("open-cart").addEventListener("click", openCart);
+        document.getElementById("close-cart").addEventListener("click", closeCart);
+        document.getElementById("cart-scrim").addEventListener("click", closeCart);
+
+        document.getElementById("continue-shopping").addEventListener("click", function (event) {
+            event.preventDefault();
+            closeCart();
+        });
+
+        // Apply discount
+        document.getElementById("apply-promo").addEventListener("click", function () {
+            var code = document.getElementById("promo-input").value.trim().toUpperCase();
+
+            if (code === "ROZEVA10") {
+                discountApplied = true;
+                showMessage("10% discount applied!");
+            } else {
+                discountApplied = false;
+                showMessage("Invalid code. Try ROZEVA10.");
+            }
+
+            updateCart();
+        });
+
+        // Open checkout
+        document.getElementById("checkout-btn").addEventListener("click", function () {
+            if (Object.keys(cart).length === 0) {
+                showMessage("Your cart is empty.");
+                return;
+            }
+
+            closeCart();
+
+            document.getElementById("checkout-form").reset();
+            document.getElementById("checkout-form").classList.remove("hidden");
+            document.getElementById("checkout-success").classList.add("hidden");
+
+            document.getElementById("checkout-modal").classList.remove("hidden");
+            document.getElementById("checkout-modal").classList.add("grid");
+
+            document.body.style.overflow = "hidden";
+        });
+
+        // Close checkout
+        function closeCheckout() {
+            document.getElementById("checkout-modal").classList.add("hidden");
+            document.getElementById("checkout-modal").classList.remove("grid");
+
+            document.body.style.overflow = "";
+        }
+
+        document.getElementById("close-checkout").addEventListener("click", closeCheckout);
+
+        // Submit checkout form
+        document.getElementById("checkout-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var name = this.elements.fullName.value.trim();
+
+            document.getElementById("success-name").textContent = name;
+            document.getElementById("success-order-id").textContent =
+                "RZ-" + Date.now();
+
+            document.getElementById("success-date").textContent =
+                new Date().toLocaleDateString();
+
+            var list = document.getElementById("success-items");
+            list.innerHTML = "";
+
+            for (var id in cart) {
+                var li = document.createElement("li");
+
+                li.textContent =
+                    cart[id].name + " × " + cart[id].quantity;
+
+                list.appendChild(li);
+            }
+
+            document.getElementById("success-total").textContent =
+                document.getElementById("grand-total").textContent;
+
+            cart = {};
+            discountApplied = false;
+
+            updateCart();
+
+            this.classList.add("hidden");
+            document.getElementById("checkout-success").classList.remove("hidden");
+        });
+
+        // Before/after slider
+        document.querySelectorAll(".car-18__cmp").forEach(function (slider) {
+            var range = slider.querySelector(".car-18__range");
+
+            if (range) {
+                range.addEventListener("input", function () {
+                    slider.style.setProperty("--pos", range.value + "%");
+                });
+
+                slider.style.setProperty("--pos", range.value + "%");
+            }
+        });
+
+        // Initial cart
+        updateCart();
+    </script>
+</body>
+
+</html>

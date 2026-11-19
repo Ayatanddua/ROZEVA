@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROZEVA | Skin Care</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <!-- header -->
+    <header class="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 py-7 sm:px-12 block">
+        <a href="#" class="text-2xl font-bold tracking-[-0.04em] text-white block">ROZEVA</a>
+        <nav aria-label="Main" class="hidden md:block">
+            <ul
+                class="flex items-center gap-2 text-[15px] font-medium text-tnv13-mut [&_a]:relative [&_a]:block [&_a]:rounded-xl [&_a]:px-4 [&_a]:py-2.5 [&_a]:[--tnv13-dx:0px] [&_a]:[--tnv13-dy:0px] [&_a]:translate-x-(--tnv13-dx) [&_a]:translate-y-(--tnv13-dy) [&_a]:transition-colors [&_a]:before:absolute [&_a]:before:inset-0 [&_a]:before:-z-10 [&_a]:before:scale-75 [&_a]:before:rounded-xl [&_a]:before:bg-white/[0.06] [&_a]:before:opacity-0 [&_a]:before:transition-[scale,opacity] [&_a]:before:duration-300 [&_a]:before:ease-[cubic-bezier(.34,1.56,.64,1)] [&_a]:before:content-[''] [&_a:hover]:text-white [&_a:hover]:before:scale-100 [&_a:hover]:before:opacity-100 [&_a:focus-visible]:text-white [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-tnv13-acc [&_a[aria-current]]:text-white [&_span]:block [&_span]:translate-x-[calc(var(--tnv13-dx)*0.6)] [&_span]:translate-y-[calc(var(--tnv13-dy)*0.6)]">
+                <li><a href="index.html" data-magnet class="text-black block"><span>Home</span></a></li>
+                <li><a href="product.html" data-magnet aria-current="page" class="text-white"><span class="text-white">Products</span></a>
+                </li>
+                <li><a href="contact.html" data-magnet><span>Contact</span></a></li>
+                <li><a href="reviews.html" data-magnet><span>Reviews</span></a></li>
+            </ul>
+        </nav>
+        <button
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full py-2.5 text-[12px] sm:px-4 sm:text-[13px]"
+            id="open-cart" type="button" aria-controls="cart-overlay" aria-expanded="false">
+                <p>🛍</p>
+            <span
+                class="ml-0.5 inline-grid h-[21px] min-w-[21px] place-items-center rounded-full bg-rozeva-deep px-1 text-[11px] text-black"
+                id="bag-count">0</span>
+        </button>
+    </header>
+    <!-- Sliding cart drawer -->
+    <div class="fixed inset-0 z-50 hidden justify-end" id="cart-overlay" aria-hidden="true">
+        <button class="absolute inset-0 h-full w-full bg-black/40 opacity-0 transition-opacity duration-300 ease-out"
+            id="cart-scrim" type="button" aria-label="Close shopping bag"></button>
+        <aside
+            class="relative z-10 flex h-full w-full max-w-[560px] min-w-0 translate-x-full flex-col bg-rozeva-cream shadow-drawer transition-transform duration-300 ease-out"
+            id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+            <div
+                class="flex flex-none items-start justify-between gap-4 border-b border-rozeva-line bg-gradient-to-r from-pink-50 to-rozeva-cream px-5 py-5 sm:px-7 sm:pb-5 sm:pt-7">
+                <div>
+                    <div class="mb-2 text-[9px] font-bold tracking-[2px] text-rozeva-deep">ROZEVA · BEAUTY, WITH GRACE
+                    </div>
+                    <h2 class="mb-2 font-editorial text-[26px] font-normal leading-tight sm:text-[29px] text-white"
+                        id="drawer-title">Your Shopping Bag</h2>
+                    <div class="text-[11px] text-rozeva-muted" id="drawer-count">0 items in your bag</div>
+                </div>
+                <button
+                    class="grid h-[38px] w-[38px] flex-none place-items-center rounded-full border border-rozeva-line bg-white text-2xl leading-none text-rozeva-deep transition hover:bg-rozeva-rose"
+                    id="close-cart" type="button" aria-label="Close shopping bag">×</button>
+            </div>
+            <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-6 sm:px-7">
+                <section class="pt-1" id="cart" aria-label="Shopping cart">
+                    <div class="flex items-center justify-between gap-3 border-b border-rozeva-line py-4">
+                        <h3 class="font-editorial text-xl font-normal text-white">Your picks</h3><span
+                            class="text-xs text-rozeva-muted" id="items-label">0 items</span>
+                    </div>
+                    <div id="cart-items"></div>
+                    <div class="hidden py-7 text-center text-sm text-rozeva-muted" id="empty-state">
+                        <div class="text-4xl text-white">♡</div>
+                        <h3 class="my-2 font-editorial text-2xl font-normal text-rozeva-ink text-white">Your bag is taking a little
+                            break</h3>
+                        <p class="text-white">Add something lovely to get started.</p>
+                        <a class="mt-4 inline-block text-xs text-rozeva-deep underline underline-offset-4 text-white"
+                            href="#recommended" id="continue-empty">Explore beauty favourites</a>
+                    </div>
+                    <a class="mt-5 inline-flex items-center gap-2 text-xs font-bold text-rozeva-deep no-underline hover:underline"
+                        href="#recommended" id="continue-shopping">← CONTINUE SHOPPING</a>
+                </section>
+
+                <aside class="mt-5 rounded-2xl border border-rozeva-line bg-white p-5 shadow-sm" id="summary"
+                    aria-label="Order summary">
+                    <h3 class="mb-4 border-b border-rozeva-line pb-3 font-editorial text-[22px] font-normal">Order
+                        Summary</h3>
+                    <div class="my-3 flex justify-between gap-3 text-xs text-rozeva-muted"><span>Subtotal</span><strong
+                            class="text-rozeva-ink" id="subtotal">Rs. 0</strong></div>
+                    <div class="my-3 flex justify-between gap-3 text-xs text-rozeva-muted"><span>Delivery</span><strong
+                            class="text-rozeva-ink" id="delivery">Free</strong></div>
+                    <div class="my-3 flex justify-between gap-3 text-xs text-rozeva-muted"><span>Discount</span><strong
+                            class="text-rozeva-green" id="discount">− Rs. 0</strong></div>
+                    <div class="my-4 flex gap-2">
+                        <input
+                            class="min-w-0 flex-1 rounded-lg border border-rozeva-line bg-white px-3 py-3 text-xs outline-none placeholder:text-rozeva-muted focus:border-rozeva-pink"
+                            id="promo-input" type="text" maxlength="20" placeholder="Enter promo code"
+                            aria-label="Promo code">
+                        <button
+                            class="rounded-lg border border-pink-200 bg-rozeva-rose px-3 text-[11px] font-bold text-rozeva-deep transition hover:bg-pink-100"
+                            id="apply-promo" type="button">APPLY</button>
+                    </div>
+                    <div class="mb-4 text-[10px] text-rozeva-muted">Demo code: <b class="text-rozeva-deep">ROZEVA10</b>
+                        for 10% off products.</div>
+                    <div class="mb-4 mt-5 flex items-center justify-between gap-3 border-t border-rozeva-line pt-4">
+                        <span class="font-bold">Total</span><strong class="font-editorial text-[22px] text-rozeva-deep"
+                            id="grand-total">Rs. 0</strong>
+                    </div>
+                    <button
+                        class="w-full rounded-xl bg-rozeva-deep px-3 py-4 text-xs font-bold tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-[#84344f] disabled:cursor-not-allowed disabled:opacity-40"
+                        id="checkout-btn" type="button" disabled>CONTINUE TO CHECKOUT&nbsp; →</button>
+                    <div class="mt-3 hidden rounded-lg bg-pink-50 p-3 text-xs leading-relaxed text-[#813b54]"
+                        id="status-message" role="status" aria-live="polite"></div>
+                    <p class="mt-4 text-center text-[10px] leading-relaxed text-rozeva-muted">♡ Checkout is in demo
+                        mode.<br>No real payment details are collected.</p>
+                </aside>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Demo checkout modal -->
+    <div class="fixed inset-0 z-[60] hidden place-items-center overflow-y-auto bg-[#2f1922]/50 p-4" id="checkout-modal">
+        <section
+            class="relative my-auto max-h-[92vh] w-full max-w-[640px] overflow-y-auto rounded-2xl border border-rozeva-line bg-rozeva-cream p-5 shadow-modal sm:p-7"
+            role="dialog" aria-modal="true" aria-labelledby="checkout-heading">
+            <div class="mb-5 flex items-start justify-between gap-4 border-b border-rozeva-line pb-4">
+                <div>
+                    <h2 class="mb-2 font-editorial text-2xl font-normal sm:text-[29px]" id="checkout-heading">Complete
+                        your order</h2>
+                    <p class="text-xs leading-relaxed text-rozeva-muted">Just a few details to prepare your ROZEVA demo
+                        order.</p>
+                </div>
+                <button
+                    class="grid h-9 w-9 flex-none place-items-center rounded-full border border-rozeva-line bg-white text-2xl text-rozeva-deep"
+                    id="close-checkout" type="button" aria-label="Close checkout">×</button>
+            </div>
+            <form class="grid grid-cols-1 gap-4 sm:grid-cols-2" id="checkout-form">
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-name">Full
+                        name *</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-name" name="fullName" autocomplete="name" required maxlength="80"
+                        placeholder="Your full name"></div>
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-phone">Phone
+                        number *</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-phone" name="phone" autocomplete="tel" required inputmode="tel" maxlength="24"
+                        placeholder="03XX XXXXXXX"></div>
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-email">Email
+                        (optional)</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-email" name="email" type="email" autocomplete="email" maxlength="120"
+                        placeholder="you@example.com"></div>
+                <div class="flex min-w-0 flex-col gap-2"><label class="text-[11px] font-bold" for="customer-city">City
+                        *</label><input
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-city" name="city" autocomplete="address-level2" required maxlength="60"
+                        placeholder="Your city"></div>
+                <div class="flex min-w-0 flex-col gap-2 sm:col-span-2"><label class="text-[11px] font-bold"
+                        for="customer-address">Delivery address *</label><textarea
+                        class="min-h-[76px] w-full resize-y rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="customer-address" name="address" autocomplete="street-address" required maxlength="300"
+                        placeholder="House, street, area..."></textarea></div>
+                <div class="flex min-w-0 flex-col gap-2 sm:col-span-2"><label class="text-[11px] font-bold"
+                        for="payment-method">Demo payment method</label><select
+                        class="w-full rounded-lg border border-rozeva-line bg-white p-3 text-sm outline-none focus:border-rozeva-pink"
+                        id="payment-method" name="paymentMethod">
+                        <option value="Cash on Delivery (demo)">Cash on Delivery (demo)</option>
+                        <option value="Test checkout — no payment">Test checkout — no payment</option>
+                    </select></div>
+                <div class="rounded-lg bg-pink-50 p-3 text-[11px] leading-relaxed text-[#8d3d58] sm:col-span-2">Demo
+                    mode: this form does not send customer details to a shop, arrange delivery, or charge money. Do not
+                    enter sensitive information. A real store needs a secure backend and a payment/delivery setup.</div>
+                <button
+                    class="rounded-xl bg-rozeva-deep px-3 py-4 text-xs font-bold tracking-wide text-white transition hover:bg-[#84344f] sm:col-span-2"
+                    type="submit">PLACE DEMO ORDER&nbsp; ✓</button>
+            </form>
+            <div class="hidden py-4 text-center" id="checkout-success">
+                <div
+                    class="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-rozeva-rose text-3xl text-rozeva-deep">
+                    ✓</div>
+                <h3 class="mb-2 font-editorial text-3xl font-normal">Thank you, <span id="success-name"></span>!</h3>
+                <p class="text-xs leading-relaxed text-rozeva-muted">Your demo order has been created in this browser.
+                    It has not been sent to a real store.</p>
+                <div class="my-5 rounded-xl border border-rozeva-line bg-pink-50 p-4 text-left">
+                    <div class="my-2 flex justify-between gap-3 text-xs"><span>Demo order number</span><strong
+                            id="success-order-id"></strong></div>
+                    <div class="my-2 flex justify-between gap-3 text-xs"><span>Order date</span><strong
+                            id="success-date"></strong></div>
+                    <ul class="my-3 list-disc space-y-2 pl-5 text-xs leading-relaxed text-rozeva-muted"
+                        id="success-items"></ul>
+                    <div class="flex justify-between gap-3 border-t border-rozeva-line pt-3 text-sm font-bold">
+                        <span>Demo total</span><strong id="success-total"></strong>
+                    </div>
+                </div>
+                <button
+                    class="w-full rounded-xl bg-rozeva-deep px-3 py-4 text-xs font-bold tracking-wide text-white hover:bg-[#84344f]"
+                    type="button" id="finish-checkout">CONTINUE SHOPPING</button>
+                <p class="mt-3 text-[10px] text-rozeva-muted">No payment was taken. This receipt is for testing only.
+                </p>
+            </div>
+        </section>
+    </div>
+
+
+    <!--banner-->
+    <img src="./images/banner 3.png">
+    <!--Product-->
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/face wash.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/face wash.png"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Refreshing Face Wash</h1>
+                            <p class="leading-relaxed mb-3 text-black">Gently cleanses your skin, removes dirt and excess oil, and leaves your face feeling fresh, clean, and soft.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="facewash" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/sun cream.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/sun cream.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Sun Protection Cream</h1>
+                            <p class="leading-relaxed mb-3 text-black">Helps protect your skin from harmful UV rays while keeping it moisturized, soft, and comfortable throughout the day.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="suncream" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/moisturizer.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/moisturizer .jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Hydrating Moisturizer</h1>
+                            <p class="leading-relaxed mb-3 text-black">Keeps your skin hydrated, soft, and smooth while helping maintain its natural moisture for a fresh, healthy-looking glow.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="moisturizer" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/serum.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/serum.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Glow Boosting Serum</h1>
+                            <p class="leading-relaxed mb-3 text-black">Helps hydrate your skin, improve its appearance, and enhance your natural glow, leaving your skin feeling smooth, fresh, and radiant.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="serum" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/lip balm.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/lip balm.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Hydrating Lip Balm</h1>
+                            <p class="leading-relaxed mb-3 text-black">Keeps your lips soft, smooth, and moisturized while helping prevent dryness and leaving them with a healthy, natural-looking shine.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="lipbalm" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/eye cream.html"></a><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/Eye cream.jpg"
+                            alt="blog">
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Refreshing Eye Cream</h1>
+                            <p class="leading-relaxed mb-3 text-black">Gently moisturizes the delicate skin around your eyes, helping it feel soft, smooth, and refreshed for a well-rested look.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="eyecream" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/micellar.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center"
+                            src="./images/micellar water.jpg" alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Gentle Micellar Water</h1>
+                            <p class="leading-relaxed mb-3 text-black">Gently removes makeup, dirt, and impurities while refreshing your skin, leaving your face feeling clean, soft, and hydrated.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="micellar" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/day cream.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/day cream.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Nourishing Day Cream</h1>
+                            <p class="leading-relaxed mb-3 text-black">Keeps your skin moisturized, soft, and smooth throughout the day while enhancing your natural glow for a fresh, radiant look.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="daycream" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/night cream.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/night cream.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Repairing Night Cream</h1>
+                            <p class="leading-relaxed mb-3 text-black">Nourishes and moisturizes your skin overnight, helping it feel soft, smooth, and refreshed for a healthy-looking glow in the morning.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="nightcream" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/face mist.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/face mist.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Refreshing Face Mist</h1>
+                            <p class="leading-relaxed mb-3 text-black">Instantly refreshes and hydrates your skin, leaving it feeling soft, revitalized, and dewy with a fresh, natural-looking glow.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="facemist" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/clay mask.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/clay mask.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Purifying Clay Mask</h1>
+                            <p class="leading-relaxed mb-3 text-black">Helps absorb excess oil and remove impurities while leaving your skin feeling clean, refreshed, and smooth for a naturally healthy-looking glow.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="claymask" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/facial dil.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/facial dil.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Gentle Facial Deal</h1>
+                            <p class="leading-relaxed mb-3 text-black">Enjoy a refreshing facial care experience with ROZEVA, designed to cleanse, nourish, and hydrate your skin for a soft, smooth, and radiant look.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="facialdil" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/sheet mask.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/sheet mask.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Hydrating Sheet Mask</h1>
+                            <p class="leading-relaxed mb-3 text-black">Deeply hydrates and refreshes your skin, helping it feel soft, smooth, and nourished while enhancing your natural glow for a radiant look.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="sheetmask" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/face mask.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/face mask.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Nourishing Face Mask</h1>
+                            <p class="leading-relaxed mb-3 text-black">Helps cleanse and nourish your skin while leaving it feeling soft, smooth, and refreshed for a healthy, radiant-looking glow.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="facemask" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/exfoliator.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/exfoliator.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Gentle Skin Exfoliator</h1>
+                            <p class="leading-relaxed mb-3 text-black">Gently removes dead skin cells and impurities, leaving your skin feeling smoother, softer, and refreshed with a natural, healthy-looking glow.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="exfoliator" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/toner.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/toner.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Refreshing Facial Toner</h1>
+                            <p class="leading-relaxed mb-3 text-black">Refreshes and hydrates your skin while helping remove leftover impurities, leaving your face feeling clean, balanced, and soft with a natural glow.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="toner" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/cleanser.html"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/cleaner.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Gentle Facial Cleanser</h1>
+                            <p class="leading-relaxed mb-3 text-black">Gently removes dirt, excess oil, and impurities while keeping your skin feeling clean, soft, and refreshed for a healthy-looking glow.</p>
+                            <div class="flex items-center flex-wrap">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="cleanser" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <a href="./skin care product pages/face scrub.html pages/"><img class="lg:h-100 md:h-50 w-full object-cover object-center" src="./images/face scrub.jpg"
+                            alt="blog"></a>
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-black mb-1">CATEGORY</h2>
+                            <h1 class="title-font text-lg font-medium text-black mb-3">ROZEVA Gentle Face Scrub</h1>
+                            <p class="leading-relaxed mb-3 text-black">Gently exfoliates your skin to remove dead skin cells and impurities, leaving your face feeling soft, smooth, and refreshed with a natural glow.</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-black inline-flex items-center md:mb-2 lg:mb-0">Learn More
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <button
+                                    class="w-full rounded-lg border border-pink-200 bg-rozeva-blush px-3 py-3 text-[11px] font-bold tracking-wide text-rozeva-deep transition hover:bg-rozeva-rose"
+                                    data-add="facescrub" type="button">＋ ADD TO BAG</button>
+                                <span
+                                    class="text-black mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>1.2K
+                                </span>
+                                <span class="text-black inline-flex items-center leading-none text-sm">
+                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                        </path>
+                                    </svg>6
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (() => {
+            const root = document.querySelector('.tnv-13');
+            if (!root || root.dataset.wired) return;
+            root.dataset.wired = '1';
+            const magnetic = matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const els = [...root.querySelectorAll('[data-magnet]')];
+            const st = els.map(() => ({ x: 0, y: 0 }));
+            const RADIUS = 90, PULL = 0.3, MAX = 14, EASE = 0.18;
+            const clamp = (v) => Math.max(-MAX, Math.min(MAX, v));
+            let px = -1e4, py = -1e4, raf = 0;
+            const frame = () => {
+                raf = 0;
+                let busy = false;
+                els.forEach((el, i) => {
+                    const s = st[i];
+                    const r = el.getBoundingClientRect();
+                    const cx = r.left - s.x + r.width / 2, cy = r.top - s.y + r.height / 2;
+                    const dx = px - cx, dy = py - cy;
+                    const near = Math.hypot(dx, dy) < RADIUS + r.width / 2;
+                    const tx = near ? clamp(dx * PULL) : 0, ty = near ? clamp(dy * PULL) : 0;
+                    s.x += (tx - s.x) * EASE;
+                    s.y += (ty - s.y) * EASE;
+                    if (Math.abs(tx - s.x) > 0.05 || Math.abs(ty - s.y) > 0.05) busy = true;
+                    el.style.setProperty('--tnv13-dx', s.x.toFixed(2) + 'px');
+                    el.style.setProperty('--tnv13-dy', s.y.toFixed(2) + 'px');
+                });
+                if (busy) raf = requestAnimationFrame(frame);
+            };
+            const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+            root.addEventListener('pointermove', (e) => {
+                const b = root.getBoundingClientRect();
+                root.style.setProperty('--tnv13-mx', (e.clientX - b.left) + 'px');
+                root.style.setProperty('--tnv13-my', (e.clientY - b.top) + 'px');
+                if (magnetic) { px = e.clientX; py = e.clientY; kick(); }
+            }, { passive: true });
+            root.addEventListener('pointerleave', () => { px = py = -1e4; kick(); });
+        })();
+
+        document.querySelectorAll('.car-18__cmp').forEach(function (cmp) {
+            var range = cmp.querySelector('.car-18__range');
+
+            function sync() {
+                cmp.style.setProperty('--pos', range.value + '%');
+            }
+
+            range.addEventListener('input', sync);
+            range.addEventListener('change', sync);
+
+            sync();
+        });
+
+
+        const catalog = {
+            facescrub: { name: 'ROZEVA Gentle Face Scrub', variant: 'Soft Rose · 8 g', price: 999, art: 'facescrub' },
+            cleanser: { name: 'ROZEVA Gentle Facial Cleanser', variant: 'Soft Rose · 8 g', price: 999, art: 'cleanser' },
+            toner: { name: 'ROZEVA Refreshing Facial Toner', variant: 'Soft Rose · 8 g', price: 999, art: 'toner' },
+            exfoliator: { name: 'ROZEVA Gentle Skin Exfoliator', variant: 'Soft Rose · 8 g', price: 999, art: 'exfoliater' },
+            facemist: { name: 'ROZEVA Refreshing Face Mist', variant: 'Soft Rose · 8 g', price: 999, art: 'facemist' },
+            micellar: { name: 'ROZEVA Gentle Micellar Water', variant: 'Soft Rose · 8 g', price: 999, art: 'micellar' },
+            lipbalm: { name: 'ROZEVA Hydrating Lip Balm', variant: 'Soft Rose · 8 g', price: 999, art: 'lipbalm' },
+            facewash: { name: 'ROZEVA Refreshing Face Wash', variant: 'Soft Rose · 8 g', price: 999, art: 'facewash' },
+            eyecream: { name: 'ROZEVA Refreshing Eye Cream', variant: 'Soft Rose · 8 g', price: 999, art: 'eyecream' },
+            moisturizer: { name: 'ROZEVA Hydrating Moisturizer', variant: 'Soft Rose · 8 g', price: 999, art: 'moisturizer' },
+            daycream: { name: 'ROZEVA Nourishing Day Cream', variant: 'Soft Rose · 8 g', price: 999, art: 'daycream' },
+            nightcream: { name: 'ROZEVA Repairing Night Cream', variant: 'Soft Rose · 8 g', price: 999, art: 'nightcream' },
+            suncream: { name: 'ROZEVA Sun Protection Cream', variant: 'Soft Rose · 8 g', price: 999, art: 'suncream' },
+            facemask: { name: 'ROZEVA Nourishing Face Mask', variant: 'Soft Rose · 8 g', price: 999, art: 'facialmask' },
+            facialdil: { name: 'ROZEVA Gentle Facial Deal', variant: 'Soft Rose · 8 g', price: 1299, art: 'facialdil' },
+            claymask: { name: 'ROZEVA Purifying Clay Mask', variant: 'Soft Rose · 8 g', price: 999, art: 'claymask' },
+            serum: { name: 'ROZEVA Glow Boosting Serum', variant: 'Daily Glow · 30 ml', price: 1899, art: 'serum' },
+            sheetmask: { name: 'ROZEVA Hydrating Sheet Mask', variant: 'Berry Nude · 3.5 g', price: 999, art: 'sheetmask' }
+        };
+        const CART_KEY = 'rozeva-tailwind-demo-cart-v1';
+        const ORDERS_KEY = 'rozeva-tailwind-demo-orders-v1';
+        function loadCart() {
+            try {
+                const saved = localStorage.getItem(CART_KEY);
+                if (saved === null) return {};
+                const quantities = JSON.parse(saved), loaded = {};
+                Object.entries(quantities || {}).forEach(([id, qty]) => {
+                    if (catalog[id] && Number.isFinite(Number(qty)) && Number(qty) > 0) {
+                        loaded[id] = { ...catalog[id], qty: Math.min(99, Math.floor(Number(qty))) };
+                    }
+                });
+                return loaded;
+            } catch { return {}; }
+        }
+        const cart = loadCart();
+        let promoApplied = false;
+        const money = n => 'Rs. ' + Math.round(n).toLocaleString('en-PK');
+        function artMarkup(type) {
+            if (type === 'serum') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="Serum bottle" role="img"><rect x="39" y="10" width="22" height="16" rx="3" fill="#755c49"/><rect x="32" y="25" width="36" height="76" rx="9" fill="#d5a65b"/><rect x="37" y="29" width="26" height="68" rx="6" fill="#f5dfab"/><rect x="37" y="56" width="26" height="25" rx="2" fill="#e5c17e"/><text x="50" y="73" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="18" fill="#755c49">R</text></svg>';
+            if (type === 'sheetmask') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="sheetmask" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'claymask') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="claymask" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'facemask') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="facemask" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'toner') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="toner" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'suncream') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="suncream" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'daycream') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="daycream" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'nightcream') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="nightcream" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'moisturizer') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="moisturizer" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'facialdil') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="facialdil" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'lipbalm') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="lipbalm" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'eyecream') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="eyecream" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'micellar') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="micellar" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'facemist') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="facemist" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'exfoliator') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="exfoliator" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'cleanser') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="cleanser" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'facescrub') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="facescrub" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            if (type === 'facewash') return '<svg class="h-14 w-12" viewBox="0 0 100 120" aria-label="facewash" role="img"><path d="M40 37 43 17 Q50 5 57 17 L60 37Z" fill="#d46d8b"/><rect x="38" y="35" width="24" height="52" rx="5" fill="#a52e54"/><rect x="42" y="38" width="16" height="45" rx="3" fill="#d46d8b"/><rect x="32" y="83" width="36" height="10" rx="2" fill="#c5a4aa"/><rect x="30" y="92" width="40" height="17" rx="3" fill="#9d7180"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="15" fill="#fff8f9">R</text></svg>';
+            return '<svg class="h-14 w-14" viewBox="0 0 100 100" aria-label="Blush compact" role="img"><circle cx="50" cy="50" r="35" fill="#e7c1cb"/><circle cx="50" cy="50" r="28" fill="#d986a0"/><circle cx="50" cy="50" r="20" fill="#cc718e"/><text x="50" y="56" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="20" fill="#fff8f9">R</text></svg>';
+        }
+        function announce(message) {
+            const el = document.getElementById('status-message');
+            el.textContent = message;
+            el.classList.remove('hidden');
+        }
+        function persistCart() {
+            try {
+                const quantities = {};
+                Object.entries(cart).forEach(([id, product]) => quantities[id] = product.qty);
+                localStorage.setItem(CART_KEY, JSON.stringify(quantities));
+            } catch { /* Browser storage may be disabled. Cart still works for this page session. */ }
+        }
+        function getTotals() {
+            let subtotal = 0, units = 0;
+            Object.values(cart).forEach(p => { subtotal += p.price * p.qty; units += p.qty; });
+            const discount = promoApplied ? Math.round(subtotal * .1) : 0;
+            const delivery = units === 0 || subtotal >= 5000 ? 0 : 200;
+            return { subtotal, units, discount, delivery, total: Math.max(0, subtotal + delivery - discount) };
+        }
+        function renderCart() {
+            const host = document.getElementById('cart-items');
+            host.innerHTML = '';
+            let subtotal = 0, units = 0;
+            Object.entries(cart).forEach(([id, p]) => {
+                if (p.qty < 1) return;
+                subtotal += p.price * p.qty; units += p.qty;
+                const row = document.createElement('article');
+                row.className = 'grid grid-cols-[64px_minmax(0,1fr)_auto] items-start gap-2.5 border-b border-rozeva-line py-4 sm:grid-cols-[76px_minmax(0,1fr)_auto] sm:gap-3';
+                row.innerHTML = `
+      <div class="grid h-[72px] w-16 place-items-center overflow-hidden rounded-xl bg-gradient-to-br ${p.art === 'serum' ? 'from-amber-100 to-orange-50' : p.art === 'sheetmask' ? 'from-purple-100 to-pink-50' : 'from-pink-100 to-rose-50'} sm:h-[83px] sm:w-[76px]">${artMarkup(p.art)}</div>
+      <div class="min-w-0"><h4 class="mb-1.5 text-xs font-bold sm:text-[13px]">${p.name}</h4><div class="mb-2 text-[10px] text-rozeva-muted">${p.variant}</div><div class="text-xs font-bold text-rozeva-deep">${money(p.price)}</div>
+        <div class="mt-2 flex flex-wrap items-center gap-1.5"><div class="inline-flex items-center gap-1.5 rounded-full border border-rozeva-line p-0.5" aria-label="Quantity for ${p.name}"><button class="grid h-6 w-6 place-items-center rounded-full bg-rozeva-blush text-base text-rozeva-deep hover:bg-rozeva-rose" type="button" data-qty="${id}" data-delta="-1" aria-label="Decrease ${p.name}">−</button><span class="min-w-3 text-center text-xs">${p.qty}</span><button class="grid h-6 w-6 place-items-center rounded-full bg-rozeva-blush text-base text-rozeva-deep hover:bg-rozeva-rose" type="button" data-qty="${id}" data-delta="1" aria-label="Increase ${p.name}">+</button></div><button class="px-1 py-1 text-[10px] text-[#927b83] underline underline-offset-4 hover:text-rozeva-deep" type="button" data-remove="${id}">Remove</button></div>
+      </div><div class="whitespace-nowrap pt-1 text-[10px] font-bold sm:text-[11px]">${money(p.price * p.qty)}</div>`;
+                host.appendChild(row);
+            });
+            const discount = promoApplied ? Math.round(subtotal * .1) : 0;
+            const delivery = units === 0 || subtotal >= 5000 ? 0 : 200;
+            document.getElementById('subtotal').textContent = money(subtotal);
+            document.getElementById('delivery').textContent = delivery === 0 ? 'Free' : money(delivery);
+            document.getElementById('discount').textContent = '− ' + money(discount);
+            document.getElementById('grand-total').textContent = money(Math.max(0, subtotal + delivery - discount));
+            document.getElementById('bag-count').textContent = units;
+            document.getElementById('items-label').textContent = units + ' item' + (units === 1 ? '' : 's');
+            document.getElementById('drawer-count').textContent = units + ' item' + (units === 1 ? '' : 's') + ' in your bag';
+            document.getElementById('empty-state').classList.toggle('hidden', units !== 0);
+            host.classList.toggle('hidden', units === 0);
+            document.getElementById('checkout-btn').disabled = units === 0;
+            document.querySelectorAll('[data-add]').forEach(btn => {
+                btn.textContent = cart[btn.dataset.add] ? '＋ ADD ANOTHER' : '＋ ADD TO BAG';
+            });
+            persistCart();
+        }
+
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartScrim = document.getElementById('cart-scrim');
+        const openCartButton = document.getElementById('open-cart');
+        const closeCartButton = document.getElementById('close-cart');
+        function openCart() {
+            cartOverlay.classList.remove('hidden');
+            cartOverlay.classList.add('flex');
+            cartOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            openCartButton.setAttribute('aria-expanded', 'true');
+            requestAnimationFrame(() => {
+                cartDrawer.classList.remove('translate-x-full');
+                cartDrawer.classList.add('translate-x-0');
+                cartScrim.classList.remove('opacity-0');
+                cartScrim.classList.add('opacity-100');
+                closeCartButton.focus();
+            });
+        }
+        function closeCart() {
+            if (cartOverlay.classList.contains('hidden')) return;
+            cartDrawer.classList.remove('translate-x-0');
+            cartDrawer.classList.add('translate-x-full');
+            cartScrim.classList.remove('opacity-100');
+            cartScrim.classList.add('opacity-0');
+            cartOverlay.setAttribute('aria-hidden', 'true');
+            openCartButton.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            window.setTimeout(() => {
+                if (cartOverlay.getAttribute('aria-hidden') === 'true') {
+                    cartOverlay.classList.add('hidden');
+                    cartOverlay.classList.remove('flex');
+                }
+            }, 310);
+            openCartButton.focus();
+        }
+        openCartButton.addEventListener('click', openCart);
+        closeCartButton.addEventListener('click', closeCart);
+        cartScrim.addEventListener('click', closeCart);
+        document.getElementById('continue-shopping').addEventListener('click', e => { e.preventDefault(); closeCart(); });
+        document.getElementById('continue-empty').addEventListener('click', e => { e.preventDefault(); closeCart(); document.getElementById('recommended').scrollIntoView({ behavior: 'smooth' }); });
+        document.getElementById('cart-items').addEventListener('click', e => {
+            const qtyButton = e.target.closest('[data-qty]');
+            const removeButton = e.target.closest('[data-remove]');
+            if (qtyButton) {
+                const id = qtyButton.dataset.qty;
+                if (cart[id]) { cart[id].qty = Math.min(99, Math.max(1, cart[id].qty + Number(qtyButton.dataset.delta))); renderCart(); }
+            }
+            if (removeButton) { delete cart[removeButton.dataset.remove]; renderCart(); announce('Item removed from your bag.'); }
+        });
+        document.querySelectorAll('[data-add]').forEach(button => button.addEventListener('click', () => {
+            const id = button.dataset.add;
+            if (cart[id]) cart[id].qty = Math.min(99, cart[id].qty + 1);
+            else cart[id] = { ...catalog[id], qty: 1 };
+            renderCart(); openCart(); announce(catalog[id].name + ' added to your bag.');
+        }));
+        document.getElementById('apply-promo').addEventListener('click', () => {
+            const value = document.getElementById('promo-input').value.trim().toUpperCase();
+            if (value === 'ROZEVA10') { promoApplied = true; renderCart(); announce('Lovely! Your 10% demo discount has been applied.'); }
+            else { promoApplied = false; renderCart(); announce('That code is not recognised. Try ROZEVA10.'); }
+        });
+
+        const checkoutModal = document.getElementById('checkout-modal');
+        const checkoutForm = document.getElementById('checkout-form');
+        const successPanel = document.getElementById('checkout-success');
+        function openCheckout() {
+            if (!Object.keys(cart).length) { announce('Your bag is empty. Add a product before checkout.'); return; }
+            closeCart();
+            checkoutForm.reset(); checkoutForm.classList.remove('hidden'); successPanel.classList.add('hidden');
+            document.getElementById('checkout-heading').textContent = 'Complete your order';
+            checkoutModal.classList.remove('hidden'); checkoutModal.classList.add('grid');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('customer-name').focus();
+        }
+        function closeCheckout() {
+            checkoutModal.classList.add('hidden'); checkoutModal.classList.remove('grid');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('checkout-btn').addEventListener('click', openCheckout);
+        document.getElementById('close-checkout').addEventListener('click', closeCheckout);
+        document.getElementById('finish-checkout').addEventListener('click', () => { closeCheckout(); document.getElementById('recommended').scrollIntoView({ behavior: 'smooth' }); });
+        checkoutModal.addEventListener('click', e => { if (e.target === checkoutModal) closeCheckout(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && !checkoutModal.classList.contains('hidden')) closeCheckout();
+            else if (e.key === 'Escape' && !cartOverlay.classList.contains('hidden')) closeCart();
+        });
+        checkoutForm.addEventListener('submit', e => {
+            e.preventDefault();
+            if (!checkoutForm.reportValidity()) return;
+            const customerName = checkoutForm.elements.fullName.value.trim();
+            const totals = getTotals();
+            const items = Object.values(cart).map(p => ({ name: p.name, qty: p.qty, price: p.price, lineTotal: p.price * p.qty }));
+            const now = new Date();
+            const orderId = 'RZ-' + now.getFullYear().toString().slice(-2) + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0') + '-' + Math.random().toString(36).slice(2, 7).toUpperCase();
+            const order = { id: orderId, createdAt: now.toISOString(), items, subtotal: totals.subtotal, delivery: totals.delivery, discount: totals.discount, total: totals.total, paymentMethod: checkoutForm.elements.paymentMethod.value, status: 'DEMO — NOT SENT' };
+            try { const old = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]'); old.unshift(order); localStorage.setItem(ORDERS_KEY, JSON.stringify(old.slice(0, 20))); } catch { /* Demo receipt still displays if storage is unavailable. */ }
+            document.getElementById('success-name').textContent = customerName;
+            document.getElementById('success-order-id').textContent = orderId;
+            document.getElementById('success-date').textContent = now.toLocaleDateString();
+            const list = document.getElementById('success-items'); list.innerHTML = '';
+            items.forEach(item => { const li = document.createElement('li'); li.textContent = `${item.name} × ${item.qty} — ${money(item.lineTotal)}`; list.appendChild(li); });
+            document.getElementById('success-total').textContent = money(totals.total);
+            Object.keys(cart).forEach(id => delete cart[id]);
+            promoApplied = false; document.getElementById('promo-input').value = ''; renderCart();
+            checkoutForm.reset(); checkoutForm.classList.add('hidden'); successPanel.classList.remove('hidden');
+            document.getElementById('checkout-heading').textContent = 'Demo order created';
+        });
+        renderCart();
+    </script>
+</body>
+</html>

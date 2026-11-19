@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ROZEVA | The Best Destination For Everyone</title>
+  <link rel="icon" type="image/png" href="/public/images/logo.png">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
+   rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Banner slider */
+    .banner-track {
+      animation: slideBanner 9s infinite;
+    }
+
+    @keyframes slideBanner {
+
+      0%,
+      30% {
+        transform: translateX(0);
+      }
+
+      33%,
+      63% {
+        transform: translateX(-33.3333%);
+      }
+
+      66%,
+      96% {
+        transform: translateX(-66.6666%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    /* Three equal image cards */
+    .beauty-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0px;
+      width: 100%;
+    }
+
+    .beauty-card {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .beauty-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    /* Smooth zoom on hover */
+    .beauty-card:hover img {
+      transform: scale(1.12);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .beauty-card img,
+      .banner-track {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="m-0 p-0 relative">
+
+  <!-- Header -->
+  <header class="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6
+   py-7
+   sm:px-12">
+
+    <a href="#" class="text-2xl font-bold tracking-[-0.04em] text-white">
+      ROZEVA<span class="text-pink-400">.</span>
+    </a>
+
+    <nav aria-label="Main" class="hidden md:block">
+      <ul class="flex items-center gap-2 text-[15px] font-medium text-white">
+        <li>
+          <a href="index.html" class="block rounded-xl px-4 py-2.5 transition-colors
+           hover:bg-white/10">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a href="/public/product.html" class="block rounded-xl px-4 py-2.5 transition-colors
+           hover:bg-white/10">
+            Products
+          </a>
+        </li>
+
+        <li>
+          <a href="/public/contact.html" class="block rounded-xl px-4 py-2.5 transition-colors
+           hover:bg-white/10">
+            Contact
+          </a>
+        </li>
+
+        <li>
+          <a href="/public/reviews.html" class="block rounded-xl px-4 py-2.5 transition-colors
+           hover:bg-white/10">
+            Reviews
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- Banners -->
+  <div class="w-full overflow-hidden m-0 p-0">
+    <div class="banner-track flex w-[300%]">
+
+      <!-- Banner 1 -->
+      <div class="w-1/3 shrink-0">
+        <img src="/public/images/banner 1.png" alt="ROZEVA makeup banner"
+          class="block h-[630px] w-full object-cover object-center">
+      </div>
+
+      <!-- Banner 2 -->
+      <div class="w-1/3 shrink-0">
+        <img src="/public/images/banner 2.png" alt="ROZEVA skincare banner"
+          class="block h-[630px] w-full object-cover object-center">
+      </div>
+
+      <!-- Banner 3 -->
+      <div class="w-1/3 shrink-0">
+        <img src="/public/images/banner 3.png" alt="ROZEVA perfume banner"
+          class="block h-[630px] w-full object-cover object-center">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-2 border-pink-100">
+  </div>
+  <!-- Video -->
+  <video src="/public/images/WhatsApp Video 2026-10-20 at 09.36.23.mp4" muted autoplay 
+  loop class="block
+   h-auto max-w-full">
+  </video>
+  <div class="border-2 border-pink-100"></div>
+  <!-- Makeup, Skincare and Perfume Images -->
+  <section class="mt-10 w-full px-4">
+
+    <div class="beauty-gallery">
+
+      <!-- Makeup -->
+      <div class="beauty-card">
+<a href="/public/product pages/makeup.html">
+  <img src="/public/images/Black And White Modern Makeup Tutorial Poster.png">
+</a>
+      </div>
+
+      <!-- Skincare -->
+      <div class="beauty-card">
+        <a href="/public/skin care product pages/skin care.html">
+          <img src="/public/images/skin.jpg" alt="ROZEVA skincare collection"></a>
+      </div>
+
+      <!-- Perfume -->
+      <div class="beauty-card">
+        <a href="/public/perfume product pages/perfume.html">
+          <img src="/public/images/perfume.jpg" alt="ROZEVA perfume collection"></a>
+      </div>
+
+    </div>
+
+  </section>
+  <div class="relative">
+    <span
+      class="absolute left-150 inline-block origin-left text-transparent 
+      !font-['Lilita_One',cursive]
+       !text-[60px] tracking-normal [-webkit-text-stroke:1px_#fb2080] 
+       [transform:scaleX(1.15)] ">
+      FACE
+    </span>
+    <div class="mt-20">
+    <div
+      class="w-60 h-80 bg-white absolute left-10 top-20 drop-shadow-2xl mb-10
+       rounded-2xl
+       cursor-pointer hover:top-18">
+      <img src="/public/images/contour.png" class="w-60 h-60 rounded-t-2xl">
+      <p class="text-xs m-1 ml-3">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm ml-3 font-sans cursor-pointer hover:text-pink-400">ROZEVA
+         Sculpting Contour</p>
+      <p class="ml-3 text-pink-400 text-2xl absolute bottom-2"><b>Rs 500</b></p>
+    </div>
+    <div
+      class="w-50 h-80 bg-white absolute left-80 top-20 drop-shadow-2xl mb-10
+       rounded-2xl
+       cursor-pointer hover:top-18">
+      <img src="/public/images/foundation.png" class="w-60 h-60 rounded-t-2xl">
+      <p class="text-xs m-1 ml-3">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm ml-3 font-sans cursor-pointer hover:text-pink-400">ROZEVA Glow
+         Foundation</p>
+      <p class="ml-3 text-pink-400 text-2xl absolute bottom-2"><b>Rs 1500</b></p>
+    </div>
+    <div
+      class="w-50 h-80 bg-white absolute left-140 top-20 drop-shadow-2xl mb-10
+       rounded-2xl
+       cursor-pointer hover:top-18">
+      <img src="/public/images/blush and highlighter.png" class="w-60 h-60 
+      rounded-t-2xl">
+      <p class="text-xs m-1 ml-3">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm ml-3 font-sans cursor-pointer hover:text-pink-400">ROZEVA Blush
+         &
+         Highlighter</p>
+      <p class="ml-3 text-pink-400 text-2xl absolute bottom-2"><b>Rs 1000</b></p>
+    </div>
+    <div
+      class="w-60 h-80 bg-white absolute left-200 top-20 drop-shadow-2xl mb-10 
+      rounded-2xl
+       cursor-pointer hover:top-18">
+      <img src="/public/images/face powder.png" class="w-60 h-60 rounded-t-2xl">
+      <p class="text-xs ml-3 m-1">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm ml-3 font-sans cursor-pointer hover:text-pink-400">
+        ROZEVA 
+        Face Powder</p>
+      <p class="ml-3 text-pink-400 text-2xl absolute bottom-2"><b>Rs 700</b></p>
+    </div>
+    <div
+      class="w-50 h-80 bg-white absolute left-270 top-20 drop-shadow-2xl mb-10
+       rounded-2xl
+       cursor-pointer hover:top-18">
+      <img src="/public/images/Concealer.png" class="w-60 h-60 rounded-t-2xl">
+      <p class="text-xs ml-3 m-1">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm ml-3 font-sans cursor-pointer hover:text-pink-400">ROZEVA
+         Flawless 
+        Concealer</p>
+      <p class="ml-3 text-pink-400 text-2xl absolute bottom-2"><b>Rs 700</b></p>
+    </div>
+    </div>
+    <a href="face.html" class="absolute right-160 top-111">View all</a>
+  </div>
+
+
+  <div class="mt-150 relative">
+    <div class="w-40 h-15 bg-pink-500 absolute left-7 bottom-8 rounded-2xl 
+    shadow-[0_20px_60px_rgba(236,72,153,0.25)]">
+      <img src="/public/images/star-256.svg" class="h-8 w-8 brightness-0 invert 
+      absolute top-3.5 left-3">
+      <p class="absolute left-12 top-2.5 text-white text-sm"><b>100% Authentic</b></p>
+      <p class="absolute left-12 bottom-2.5 text-xs text-white">Beautiful products</p>
+    </div>
+
+    <div class="relative isolate mx-auto w-full max-w-5xl">
+
+
+
+      <!-- Your video -->
+      <video src="./public/images/advertisment.mp4" muted loop autoplay class="relative
+       mt-30 z-10 w-[300px] h-[500px] rounded-2xl
+       shadow-[0_20px_60px_rgba(236,72,153,0.25)] left-10 block">
+
+      </video>
+
+    </div>
+    <div
+      class="w-45 h-15 bg-white absolute left-130 bottom-100 rounded-2xl 
+      shadow-[0_20px_60px_rgba(236,72,153,0.25)] border-1 border-pink-200 ">
+      <img src="/public/images/security-check-256.svg" class="h-8 w-8 absolute top-3.5
+       left-3"
+        style="filter: brightness(0) saturate(100%) invert(22%) sepia(83%) 
+        saturate(2600%) 
+        hue-rotate(310deg) brightness(90%) contrast(90%);">
+      <p class="absolute left-12 top-2.5 text-sm"><b>100% Authentic</b></p>
+      <p class="absolute left-12.5 bottom-2.5 text-xs text-gray-400">Beautiful 
+        products</p>
+    </div>
+
+    <p class="text-pink-500 font-sans absolute left-180 bottom-120">Why Choose Me</p>
+    <h1 class="text-4xl absolute bottom-110 left-180">Beauty That Makes You 
+      <i class="text-pink-500">Glow & Shine</i>
+    </h1>
+    <p class="text-gray-400 absolute left-180 bottom-95">Discover your beauty
+       essentials,
+       thoughtfully selected to
+      complement every skin tone and help you feel confident in your own style.</p>
+
+    <div
+      class="w-150 h-18 bg-white absolute left-180 bottom-73 rounded-2xl 
+      shadow-[0_20px_60px_rgba(236,72,153,0.25)] border-1 border-pink-200">
+      <p class="absolute left-10 top-3"><b>Quality You Can Trust</b></p>
+      <h6 class="text-gray-400 text-sm absolute left-10 bottom-3">Beauty products
+         you can trust.</h6>
+    </div>
+    <div
+      class="w-150 h-18 bg-white absolute left-180 bottom-50 rounded-2xl 
+      shadow-[0_20px_60px_rgba(236,72,153,0.25)] border-1 border-pink-200">
+      <p class="absolute left-10 top-3"><b>Beauty for Every Skin Tone</b></p>
+      <h6 class="text-gray-400 text-sm absolute left-10 bottom-3">Made for every 
+        skin tone.</h6>
+    </div>
+    <div
+      class="w-150 h-18 bg-white absolute left-180 bottom-28 rounded-2xl 
+      shadow-[0_20px_60px_rgba(236,72,153,0.25)] border-1 border-pink-200">
+      <p class="absolute left-10 top-3"><b>Beauty Delivered to Your Door</b></p>
+      <h6 class="text-gray-400 text-sm absolute left-10 bottom-3">Beauty delivered to 
+        your door.</h6>
+    </div>
+    <div
+      class="w-150 h-18 bg-white absolute left-180 bottom-5 rounded-2xl 
+      shadow-[0_20px_60px_rgba(236,72,153,0.25)] border-1 border-pink-200">
+      <p class="absolute left-10 top-3"><b>A Shopping Experience You'll Love</b></p>
+      <h6 class="text-gray-400 text-sm absolute left-10 bottom-3">Shop with confidence, 
+        every time.</h6>
+    </div>
+  </div>
+
+
+  <div class=" w-full h-100 bg-[radial-gradient(circle,#E75480,#FF1493)] mt-30 mb-30
+   relative">
+    <p class="text-white absolute top-10 left-5">Our Promise</p>
+    <h1 class="text-white absolute top-25 left-5 text-3xl font-['Oswald'] font-normal 
+    uppercase tracking-wide"><b>Beauty
+        Made for <i>Every Woman</i></b></h1>
+    <p class="text-white absolute top-40 left-5">
+      ROZEVA was created with one goal: to help everyone feel<br>
+       confident,beautiful, and comfortable in their own skin.<br>
+       From makeup essentials to skincare favorites and elegant fragrances,<br>
+       we bring you beauty products designed to complement your unique<br> 
+       style and celebrate your natural beauty. At ROZEVA, we believe <br>
+        that every individual deserves to feel their best, every day.</p>
+    <button class="bg-white border-0 text-pink-500 w-33 h-12 rounded absolute
+     bottom-8 left-5
+     text-sm">OUR
+      STORY</button>
+    <div class="w-150 h-20 absolute top-20 right-10 bg-white/5 border-2
+     border-white rounded ">
+      <img src="/public/images/sparkles-32.svg" alt="star" class="h-10 w-10 brightness-0
+       invert absolute 
+      top-5 left-5">
+      <p class="absolute top-5 left-20 text-white"><b>Beauty for Every You</b></p>
+      <p class="text-white text-sm absolute bottom-3 left-20">Discover makeup,
+         skincare, and
+         fragrances
+         that complement your
+        unique style</p>
+    </div>
+    <div class="w-150 h-20 absolute top-45 right-10 bg-white/5 border-2
+     border-white rounded ">
+      <img src="/public/images/heart-256.svg" alt="Heart" class="h-10 w-10 brightness-0
+       invert absolute
+       top-5 left-5">
+      <p class="absolute top-5 left-20 text-white"><b>Your Beauty, Your Style</b></p>
+      <p class="text-white text-sm absolute bottom-3 left-20">
+        Celebrate your individuality with beauty essentials for
+        your
+        everyday routine</p>
+    </div>
+    <div class="w-150 h-20 absolute top-70 right-10 bg-white/5 border-2 border-white
+     rounded ">
+      <img src="/public/images/truck-256.svg" alt="Heart" class="h-10 w-10 brightness-0 invert 
+      absolute
+       top-5 left-5">
+      <p class="absolute top-5 left-20 text-white"><b>Delivery Across Pakistan</b></p>
+      <p class="text-white text-sm absolute bottom-3 left-20">
+        Shop your ROZEVA favorites and have them delivered to your
+        doorstep</p>
+    </div>
+  </div>
+
+  <script>
+    // Aapka existing before-and after slider code yahan rehne dein 
+    // Signup model ke liye JavaScript
+    // 
+
+  const signupModal = document.getElementById("signupModal");
+  const closeSignup = document.getElementById("closeSignup");
+  const signupForm = document.getElementById("signupForm");
+  const signupStatus = document.getElementById("signupStatus");
+
+  // 90,000 milliseconds = 90 seconds
+  const signupDelay = 90 * 1000;
+
+  // Is tab mein popup pehle band ya submit ho chuka ho to dobara na dikhayein
+  if (!sessionStorage.getItem("rozevaSignupDone")) {
+    setTimeout(() => {
+      signupModal.classList.remove("hidden");
+      signupModal.classList.add("flex");
+    }, signupDelay);
+  }
+
+  function hideSignupModal() {
+    signupModal.classList.add("hidden");
+    signupModal.classList.remove("flex");
+    sessionStorage.setItem("rozevaSignupDone", "true");
+  }
+
+  closeSignup.addEventListener("click", hideSignupModal);
+
+  // Popup ke bahar click karne par band ho
+  signupModal.addEventListener("click", (event) => {
+    if (event.target === signupModal) {
+      hideSignupModal();
+    }
+  });
+
+  // Escape key se popup band ho
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !signupModal.classList.contains("hidden")) {
+      hideSignupModal();
+    }
+  });
+
+  signupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    signupStatus.textContent = "Submitting...";
+
+    const formData = new FormData(signupForm);
+
+    const signupData = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      consent: formData.get("consent") === "on",
+    };
+
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Signup submit nahi ho saka.");
+      }
+
+      signupStatus.textContent = "Shukriya! Aap signup ho gayi hain.";
+      sessionStorage.setItem("rozevaSignupDone", "true");
+      signupForm.reset();
+
+      setTimeout(() => {
+        signupModal.classList.add("hidden");
+        signupModal.classList.remove("flex");
+      }, 1200);
+    } catch (error) {
+      signupStatus.textContent =
+        error.message || "Server se rabta nahi ho saka.";
+    }
+  });
+  </script>
+
+</body>
+
+</html>
